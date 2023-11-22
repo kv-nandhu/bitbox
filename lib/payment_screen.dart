@@ -1,5 +1,6 @@
 
 // ignore: file_names
+import 'package:bitebox/confirmation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -302,7 +303,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         width: 358,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) => CartScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => CnfrmPage()));
                           },
                           style: ElevatedButton.styleFrom(
                             // ignore: deprecated_member_use

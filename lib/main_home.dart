@@ -1,6 +1,6 @@
-import 'package:bitebox/favScreen.dart';
-import 'package:bitebox/homeScreen.dart';
-import 'package:bitebox/ordersScreen.dart';
+import 'package:bitebox/fav_screen.dart';
+import 'package:bitebox/home_screen.dart';
+import 'package:bitebox/orders_screen.dart';
 import 'package:bitebox/profile.dart';
 import 'package:flutter/material.dart';
 

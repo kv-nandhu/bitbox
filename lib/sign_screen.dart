@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:bitebox/loginScreen.dart';
-import 'package:bitebox/userLogin.dart';
+import 'package:bitebox/login_screen.dart';
+import 'package:bitebox/user_login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';

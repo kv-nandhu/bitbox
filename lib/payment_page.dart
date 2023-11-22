@@ -1,5 +1,5 @@
 // ignore: file_names
-import 'package:bitebox/addressScreen.dart';
+import 'package:bitebox/address_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

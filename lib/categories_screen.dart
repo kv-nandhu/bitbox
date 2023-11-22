@@ -1,7 +1,7 @@
 // ignore: file_names
-import 'package:bitebox/recDetailScreen.dart';
+import 'package:bitebox/rec_detailScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:bitebox/categoryData.dart';
+import 'package:bitebox/category_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -46,9 +46,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         // ignore: sized_box_for_whitespace
                         leading: Container(
                           clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18)),
                           child: Image.asset(
-                            '${productlist[index].imagesp}',fit: BoxFit.cover,
+                            '${productlist[index].imagesp}',
+                            fit: BoxFit.cover,
                             width: 90,
                           ),
                         ),
@@ -87,20 +89,22 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                        
-                           Text(
-                              '${productlist[index].stock}',
-                              style: TextStyle(
-                                  color: Checkstock(productlist[index].stock),
-                                  fontWeight: FontWeight.w600),
-                            ),
-                        
+                          Text(
+                            '${productlist[index].stock}',
+                            style: TextStyle(
+                                color: Checkstock(productlist[index].stock),
+                                fontWeight: FontWeight.w600),
+                          ),
                           ElevatedButton(
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(itemName: '',)));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailScreen(
+                                              itemName: '',
+                                            )));
                               },
-                              style: ButtonStyle(
-                                  ),
+                              style: ButtonStyle(),
                               child: Text('Details')),
                         ],
                       ),

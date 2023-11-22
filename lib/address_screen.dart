@@ -1,6 +1,6 @@
 // ignore: file_names
-import 'package:bitebox/addAddress.dart';
-import 'package:bitebox/paymentScreen.dart';
+import 'package:bitebox/add_address.dart';
+import 'package:bitebox/payment_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +19,8 @@ class _AddressScreenState extends State<AddressScreen> {
           backgroundColor: Colors.redAccent.shade700,
           title: Text("Deliver to"),
           centerTitle: true,
-          
         ),
-        body:  Padding(
+        body: Padding(
           padding: const EdgeInsets.all(20),
           child: ListView(
             children: [
@@ -52,7 +51,10 @@ class _AddressScreenState extends State<AddressScreen> {
                             ]),
                         child: GestureDetector(
                           onTap: () => {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => AddAddressScreen())),
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AddAddressScreen())),
                           },
                           child: Row(
                             children: [
@@ -76,7 +78,6 @@ class _AddressScreenState extends State<AddressScreen> {
                                         ),
                                       ),
                                       Icon(CupertinoIcons.plus)
-                                    
                                     ],
                                   ),
                                 ),
@@ -97,7 +98,10 @@ class _AddressScreenState extends State<AddressScreen> {
                         width: 358,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentScreen()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PaymentScreen()));
                           },
                           style: ElevatedButton.styleFrom(
                             // ignore: deprecated_member_use
@@ -121,7 +125,6 @@ class _AddressScreenState extends State<AddressScreen> {
               )
             ],
           ),
-        )
-        );
+        ));
   }
 }

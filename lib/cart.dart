@@ -1,9 +1,5 @@
-// ignore: file_names
-// ignore_for_file: sort_child_properties_last
-
-// ignore: unused_import
-import 'package:bitebox/addressScreen.dart';
-import 'package:bitebox/paymentScreen.dart';
+import 'package:bitebox/address_screen.dart';
+import 'package:bitebox/payment_screen.dart';
 import 'package:bitebox/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -443,7 +439,6 @@ class _CartScreenState extends State<CartScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                 
                 ],
               ),
             )

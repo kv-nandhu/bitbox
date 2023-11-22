@@ -1,6 +1,8 @@
+import 'package:bitebox/addproduct_functions.dart';
 import 'package:bitebox/cart.dart';
-import 'package:bitebox/categoriesScreen.dart';
-import 'package:bitebox/recDetailScreen.dart';
+import 'package:bitebox/categories_screen.dart';
+import 'package:bitebox/rec_detailScreen.dart';
+import 'package:bitebox/user_product.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +15,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+    @override
+      void initState() {
+    super.initState();
+    getproducts();
+  }
   icon() => null;
   List<AssetImage> assetimage = [
     AssetImage('images/break.jpg'),
@@ -194,96 +201,104 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 10,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12.0,
-                  mainAxisSpacing: 12.0,
-                  mainAxisExtent: 290,
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailScreen(
-                            itemName: name[index],
+            ValueListenableBuilder(
+              valueListenable: productlist,
+              builder: (context, List<Addproducts>addlist,Widget? child) {
+                
+              
+              return Expanded(
+                child: GridView.builder(
+                itemCount: addlist.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12.0,
+                    mainAxisSpacing: 12.0,
+                    mainAxisExtent: 290,
+                  ),
+                  itemBuilder: (context, index) {
+                    final addproducts = addlist[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailScreen(
+                              itemName: name[index],
+                            ),
                           ),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
-                      );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      ),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16.0),
-                              topRight: Radius.circular(16.0),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(16.0),
+                                topRight: Radius.circular(16.0),
+                              ),
+                              child: Image(
+                                image: image[index],
+                                height: 170,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            child: Image(
-                              image: image[index],
-                              height: 170,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  name[index],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .merge(
-                                        const TextStyle(
-                                            fontWeight: FontWeight.w700),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    addproducts.name,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .merge(
+                                          const TextStyle(
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                  Text(rate[index]),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      IconButton(
+                                        icon: Icon(Icons.favorite_border),
+                                        onPressed: () {
+                                          // Handle favorite button tap
+                                        },
                                       ),
-                                ),
-                                const SizedBox(
-                                  height: 8.0,
-                                ),
-                                Text(rate[index]),
-                                const SizedBox(
-                                  height: 8.0,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(Icons.favorite_border),
-                                      onPressed: () {
-                                        // Handle favorite button tap
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.shopping_cart_outlined),
-                                      onPressed: () {
-                                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => CartScreen()));
-                                      
-                                      },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+                                      IconButton(
+                                        icon: Icon(Icons.shopping_cart_outlined),
+                                        onPressed: () {
+                                           Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => CartScreen()));
+                                        
+                                        },
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
+                    );
+                  },
+                ),
+              );
+              }
             )
 
             //

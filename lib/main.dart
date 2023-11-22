@@ -1,5 +1,6 @@
-import 'package:bitebox/splashScreen.dart';
-import 'package:bitebox/userLogin.dart';
+import 'package:bitebox/splash_screen.dart';
+import 'package:bitebox/user_login.dart';
+import 'package:bitebox/user_product.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -9,12 +10,16 @@ const SAVE_KEY = 'userLogin';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
 
+    await Hive.initFlutter();
+  
   if (!Hive.isAdapterRegistered(UserAdapter().typeId)) {
     Hive.registerAdapter(UserAdapter());
   }
-  runApp(MyApp());
+  if (!Hive.isAdapterRegistered(AddproductsAdapter().typeId)) {
+    Hive.registerAdapter(AddproductsAdapter());
+  }
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

@@ -92,10 +92,14 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 45),
-                  child:
-                      ElevatedButton(onPressed: () {
-                        Navigator.pop(context, MaterialPageRoute(builder: (context) => ProfileScreen()));
-                      }, child: Text('Submit')),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfileScreen()));
+                      },
+                      child: Text('Submit')),
                 ),
               ],
             ),

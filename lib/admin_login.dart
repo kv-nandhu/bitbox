@@ -1,4 +1,4 @@
-import 'package:bitebox/adminHome.dart';
+import 'package:bitebox/admin_home.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

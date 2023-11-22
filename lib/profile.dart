@@ -1,5 +1,5 @@
-import 'package:bitebox/editProfile.dart';
-import 'package:bitebox/firstScreen.dart';
+import 'package:bitebox/edit_profile.dart';
+import 'package:bitebox/first_screen.dart';
 import 'package:bitebox/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

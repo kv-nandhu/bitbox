@@ -1,6 +1,6 @@
 // ignore: file_names
-import 'package:bitebox/addressScreen.dart';
-import 'package:bitebox/paymentScreen.dart';
+import 'package:bitebox/address_screen.dart';
+import 'package:bitebox/payment_screen.dart';
 import 'package:flutter/material.dart';
 
 class AddAddressScreen extends StatefulWidget {
@@ -16,8 +16,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _addresssController = TextEditingController();
-  final TextEditingController _cityController =TextEditingController();
-    final TextEditingController _pincodeController =TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _pincodeController = TextEditingController();
 
   String? _validateAddress(String? value) {
     String addressRegex = r'^[a-zA-Z]+';
@@ -54,7 +54,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     }
     return null;
   }
-    String? _validateCity(String? value) {
+
+  String? _validateCity(String? value) {
     String cityRegex = r'^[0-9]{6,}$';
     RegExp regex = RegExp(cityRegex);
     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
@@ -62,6 +63,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     }
     return null;
   }
+
   String? _validatePincode(String? value) {
     String pincodeRegex = r'^[0-9]{6,}$';
     RegExp regex = RegExp(pincodeRegex);
@@ -70,8 +72,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     }
     return null;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -188,42 +188,40 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     hintText: "Enter the Pincode",
                   ),
                 ),
-                SizedBox(height: 40,),
-                   Padding(
-                    padding: EdgeInsets.all(10),
-                    // ignore: sized_box_for_whitespace
-                    child: Container(
-                      height: 50,
-                      width: 400,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AddressScreen()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          // ignore: deprecated_member_use
-                          primary: Colors.redAccent.shade700,
-                        ),
-                        child: Text(
-                          'Save Address',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                SizedBox(
+                  height: 40,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  // ignore: sized_box_for_whitespace
+                  child: Container(
+                    height: 50,
+                    width: 400,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddressScreen()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        // ignore: deprecated_member_use
+                        primary: Colors.redAccent.shade700,
+                      ),
+                      child: Text(
+                        'Save Address',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
+                ),
               ],
             ),
-          
           ),
-          
         ),
-        
-          
       ),
     );
   }

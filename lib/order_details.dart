@@ -1,7 +1,7 @@
 // ignore: file_names
-import 'package:bitebox/PaymentPage.dart';
+import 'package:bitebox/payment_page.dart';
 import 'package:bitebox/cart.dart';
-import 'package:bitebox/paymentScreen.dart';
+import 'package:bitebox/payment_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:clippy_flutter/arc.dart';
