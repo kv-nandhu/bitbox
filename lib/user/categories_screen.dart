@@ -1,7 +1,7 @@
 // ignore: file_names
-import 'package:bitebox/rec_detailScreen.dart';
+import 'package:bitebox/user/rec_detailScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:bitebox/category_data.dart';
+import 'package:bitebox/user/category_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoriesScreen extends StatefulWidget {

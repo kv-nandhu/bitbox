@@ -11,6 +11,15 @@ class Addproducts extends HiveObject {
  @HiveField(1)
    late String name;
 
+    @HiveField(2)
+   late String prize;
+
+   @HiveField(3)
+   late String image;
+
+
+
+
   @HiveField(5)
   int? id;
 
@@ -18,6 +27,9 @@ class Addproducts extends HiveObject {
   Addproducts(
     {
     required this.name,
+     required this.prize,
+      required this.image,
+    
    }
   );
 }

@@ -1,6 +1,6 @@
-import 'package:bitebox/main_home.dart';
-import 'package:bitebox/sign_screen.dart';
-import 'package:bitebox/user_login.dart';
+import 'package:bitebox/user/main_home.dart';
+import 'package:bitebox/user/sign_screen.dart';
+import 'package:bitebox/models/user_login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';

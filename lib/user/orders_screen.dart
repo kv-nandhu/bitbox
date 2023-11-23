@@ -1,7 +1,7 @@
 // ignore: file_names
-import 'package:bitebox/order_cancel.dart';
-import 'package:bitebox/order_detail.dart';
-import 'package:bitebox/order_details.dart';
+import 'package:bitebox/user/order_cancel.dart';
+import 'package:bitebox/user/order_detail.dart';
+import 'package:bitebox/user/order_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

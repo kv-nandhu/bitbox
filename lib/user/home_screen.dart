@@ -1,8 +1,10 @@
-import 'package:bitebox/addproduct_functions.dart';
-import 'package:bitebox/cart.dart';
-import 'package:bitebox/categories_screen.dart';
-import 'package:bitebox/rec_detailScreen.dart';
-import 'package:bitebox/user_product.dart';
+import 'dart:io';
+
+import 'package:bitebox/function/addproduct_functions.dart';
+import 'package:bitebox/user/cart.dart';
+import 'package:bitebox/user/categories_screen.dart';
+import 'package:bitebox/user/rec_detailScreen.dart';
+import 'package:bitebox/models/user_product.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
@@ -19,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       void initState() {
     super.initState();
     getproducts();
+   
   }
   icon() => null;
   List<AssetImage> assetimage = [
@@ -240,11 +243,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 topLeft: Radius.circular(16.0),
                                 topRight: Radius.circular(16.0),
                               ),
-                              child: Image(
-                                image: image[index],
-                                height: 170,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
+                              child: Image.file(
+                              File(
+                                addproducts.image,
+                              )
+
+                                // image: image[index],
+                                // height: 170,
+                                // width: double.infinity,
+                                // fit: BoxFit.cover,
                               ),
                             ),
                             Padding(
@@ -265,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const SizedBox(
                                     height: 8.0,
                                   ),
-                                  Text(rate[index]),
+                                  Text('₹${addproducts.prize}'),
                                   const SizedBox(
                                     height: 8.0,
                                   ),

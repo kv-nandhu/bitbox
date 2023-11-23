@@ -1,6 +1,6 @@
 
 // ignore: file_names
-import 'package:bitebox/confirmation.dart';
+import 'package:bitebox/user/confirmation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

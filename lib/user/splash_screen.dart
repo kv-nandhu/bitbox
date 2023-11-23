@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:bitebox/first_screen.dart';
+import 'package:bitebox/user/first_screen.dart';
 import 'package:flutter/material.dart';
 
 class ScreenSplash extends StatefulWidget {

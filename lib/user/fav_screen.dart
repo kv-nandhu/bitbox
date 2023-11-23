@@ -1,6 +1,6 @@
 // ignore: file_names
-import 'package:bitebox/cart.dart';
-import 'package:bitebox/rec_detailScreen.dart';
+import 'package:bitebox/user/cart.dart';
+import 'package:bitebox/user/rec_detailScreen.dart';
 import 'package:flutter/material.dart';
 
 class FavScreen extends StatefulWidget {

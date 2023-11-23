@@ -1,6 +1,6 @@
 // ignore: file_names
-import 'package:bitebox/add_address.dart';
-import 'package:bitebox/payment_screen.dart';
+import 'package:bitebox/user/add_address.dart';
+import 'package:bitebox/user/payment_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

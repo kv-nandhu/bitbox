@@ -1,7 +1,7 @@
-import 'package:bitebox/fav_screen.dart';
-import 'package:bitebox/home_screen.dart';
-import 'package:bitebox/orders_screen.dart';
-import 'package:bitebox/profile.dart';
+import 'package:bitebox/user/fav_screen.dart';
+import 'package:bitebox/user/home_screen.dart';
+import 'package:bitebox/user/orders_screen.dart';
+import 'package:bitebox/user/profile.dart';
 import 'package:flutter/material.dart';
 
 class HomesScreen extends StatefulWidget {

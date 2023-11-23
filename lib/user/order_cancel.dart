@@ -1,8 +1,8 @@
 // ignore: file_names
-import 'package:bitebox/cart.dart';
+import 'package:bitebox/user/cart.dart';
 import 'package:bitebox/main.dart';
-import 'package:bitebox/order_detail.dart';
-import 'package:bitebox/rec_detailScreen.dart';
+import 'package:bitebox/user/order_detail.dart';
+import 'package:bitebox/user/rec_detailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

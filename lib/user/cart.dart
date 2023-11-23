@@ -1,6 +1,6 @@
-import 'package:bitebox/address_screen.dart';
-import 'package:bitebox/payment_screen.dart';
-import 'package:bitebox/profile.dart';
+import 'package:bitebox/user/address_screen.dart';
+import 'package:bitebox/user/payment_screen.dart';
+import 'package:bitebox/user/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

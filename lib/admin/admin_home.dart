@@ -1,6 +1,6 @@
 // ignore: file_names
-import 'package:bitebox/admin_product.dart';
-import 'package:bitebox/first_screen.dart';
+import 'package:bitebox/admin/admin_product.dart';
+import 'package:bitebox/user/first_screen.dart';
 import 'package:flutter/material.dart';
 
 class AdminHome extends StatefulWidget {

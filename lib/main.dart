@@ -1,6 +1,6 @@
-import 'package:bitebox/splash_screen.dart';
-import 'package:bitebox/user_login.dart';
-import 'package:bitebox/user_product.dart';
+import 'package:bitebox/user/splash_screen.dart';
+import 'package:bitebox/models/user_login.dart';
+import 'package:bitebox/models/user_product.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';

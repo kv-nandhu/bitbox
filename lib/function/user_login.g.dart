@@ -1,34 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_product.dart';
+part of '../models/user_login.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AddproductsAdapter extends TypeAdapter<Addproducts> {
+class UserAdapter extends TypeAdapter<User> {
   @override
-  final int typeId = 2;
+  final int typeId = 1;
 
   @override
-  Addproducts read(BinaryReader reader) {
+  User read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Addproducts(
-      name: fields[0] as String,
-    )..id = fields[5] as int?;
+    return User(
+      email: fields[0] as String,
+      name: fields[1] as String,
+      number: fields[2] as String,
+      password: fields[3] as String,
+    );
   }
 
   @override
-  void write(BinaryWriter writer, Addproducts obj) {
+  void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(4)
       ..writeByte(0)
+      ..write(obj.email)
+      ..writeByte(1)
       ..write(obj.name)
-      ..writeByte(5)
-      ..write(obj.id);
+      ..writeByte(2)
+      ..write(obj.number)
+      ..writeByte(3)
+      ..write(obj.password);
   }
 
   @override
@@ -37,7 +44,7 @@ class AddproductsAdapter extends TypeAdapter<Addproducts> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AddproductsAdapter &&
+      other is UserAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

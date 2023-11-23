@@ -1,8 +1,8 @@
-import 'package:bitebox/admin_home.dart';
+import 'package:bitebox/admin/admin_home.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'main.dart';
+import '../main.dart';
 
 class AdminLogin extends StatelessWidget {
   AdminLogin({super.key});

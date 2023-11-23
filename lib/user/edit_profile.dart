@@ -1,4 +1,4 @@
-import 'package:bitebox/profile.dart';
+import 'package:bitebox/user/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

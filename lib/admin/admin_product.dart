@@ -1,9 +1,12 @@
 // ignore_for_file: sort_child_properties_last
 
-import 'package:bitebox/addproduct_functions.dart';
-import 'package:bitebox/user_product.dart';
+import 'dart:io';
+
+import 'package:bitebox/function/addproduct_functions.dart';
+import 'package:bitebox/models/user_product.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -15,6 +18,8 @@ class AddProduct extends StatefulWidget {
 class _AddProductState extends State<AddProduct> {
   final _formKey= GlobalKey<FormState>();
  final _productnameController = TextEditingController();
+ final _productprizeController = TextEditingController();
+ File? imageSelect;
 
   
   @override
@@ -51,6 +56,8 @@ class _AddProductState extends State<AddProduct> {
                 height: 20,
               ),
               TextFormField(
+                 controller: _productprizeController,
+                  validator: validateProductPrize,
                 decoration: InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 25, horizontal: 30),
@@ -86,12 +93,15 @@ class _AddProductState extends State<AddProduct> {
                     width: 10,
                   ),
                   Container(
-                    child: Center(
-                      child: Text(
-                        'Add Image',
-                        style: GoogleFonts.inter(color: Colors.black),
-                      ),
-                    ),
+                    
+                    child: imageSelect !=null 
+                     ? Image.file(
+                  
+                        imageSelect!,fit:BoxFit.cover
+                        
+                     )
+                      : const Icon(Icons.person),
+                    
                     height: 160,
                     width: 160,
                     decoration:
@@ -101,19 +111,21 @@ class _AddProductState extends State<AddProduct> {
                     width: 15,
                   ),
                   Column(
-                    children: const [
+                    children:  [
                       Icon(Icons.photo_camera_outlined),
                       SizedBox(
                         height: 20,
                       ),
-                      Icon(Icons.photo)
+                      IconButton(onPressed: () {
+                        _pickImage();
+                      }, icon: Icon(Icons.photo))
                     ],
                   )
                 ],
               ),
               SizedBox(
                 height: 35,
-              ),
+              ), 
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.grey,
@@ -129,7 +141,7 @@ class _AddProductState extends State<AddProduct> {
       ),
     );
   }
-//name validate
+//name validate------------------------------------------------
  String? validateProductName(String? value) {
     final trimmedvalue = value?.trim();
 
@@ -139,17 +151,31 @@ class _AddProductState extends State<AddProduct> {
     return null;
   }
 
+String? validateProductPrize(String? value) {
+    final trimmedvalue = value?.trim();
 
-  //button
+    if (trimmedvalue == null || trimmedvalue.isEmpty) {
+      return 'enter product prize';
+    }
+    return null;
+  }
+
+  //button--------------------------------------------------
 
    Future<void> addButton() async {
     final _name = _productnameController.text.trim();
+    final _prize = _productprizeController.text.trim();
+    if (imageSelect==null){
+      return;
+    }
  
     
     if (_formKey.currentState!.validate() &&
-        _name.isNotEmpty ) {
+        _name.isNotEmpty&& _prize.isNotEmpty ) {
       final _add = Addproducts(
           name: _name,
+          prize: _prize,
+          image: imageSelect!.path.toString(),
         );
       addproduct(_add);
       showSnackBar(context, 'Added Succesfully!');
@@ -172,6 +198,17 @@ class _AddProductState extends State<AddProduct> {
       backgroundColor: Colors.red,
     ));
   }
+ Future<void> _pickImage() async {
+   
+      final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+      if (pickedFile != null) {
+        setState(() {
+          imageSelect = File(pickedFile.path);
+        });
+      }
+   
+
   }
 
-
+}

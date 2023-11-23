@@ -1,4 +1,4 @@
-import 'package:bitebox/home_screen.dart';
+import 'package:bitebox/user/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
