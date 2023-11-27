@@ -16,6 +16,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.redAccent.shade700,
         title: Text("Profile"),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(

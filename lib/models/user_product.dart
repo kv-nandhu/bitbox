@@ -1,34 +1,41 @@
 // ignore: file_names
 import 'package:hive/hive.dart';
-part 'user_product.g.dart';
+part '../function/user_product.g.dart';
 
 
 @HiveType(typeId: 2)
 class Addproducts extends HiveObject {
   @HiveField(0)
-  
+  String? name;
 
  @HiveField(1)
-   late String name;
+   String? prize;
 
     @HiveField(2)
-   late String prize;
+   String? image;
 
    @HiveField(3)
-   late String image;
+   String? about;
 
+   @HiveField(4)
+   String? category;
 
+   @HiveField(5)
+   String? unit;
 
-
-  @HiveField(5)
+  @HiveField(6)
   int? id;
-
 
   Addproducts(
     {
     required this.name,
      required this.prize,
       required this.image,
+         required this.about,
+            required this.category,
+              required this.unit,
+                required this.id,
+    
     
    }
   );

@@ -166,24 +166,36 @@ class _OrderCancelState extends State<OrderCancel> {
                 ],
               ),
               SizedBox(height: 20,),
-              Row(
-                children: [
-                  Padding(padding: EdgeInsets.all(15),
-                  child: Text("Other reason"),
-                  )
+              // Row(
+              //   children: [
+              //     Padding(padding: EdgeInsets.all(15),
+              //     child: Text("Other reason"),
+              //     )
                  
-                ],
+              //   ],
+              // ),
+              Padding(
+                padding:  EdgeInsets.only(left: 25),
+                child: Align(
+                  alignment: Alignment.bottomLeft,
+                child: Text("other reason",style: TextStyle(fontSize: 15),),
+                ),
               ),
            Container(
             padding: EdgeInsets.all(20),
              child: TextFormField(
-              decoration: InputDecoration(
-                hintText: 'Description here....'
-              ),
+              maxLines: 5,
               keyboardType: TextInputType.multiline,
-              minLines: 1, 
-              maxLines: 5, 
-
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 40,horizontal: 30
+                ),
+                hintText: 'Description here....',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10)
+                )
+              ),
+                
                    ),
            ),
            SizedBox(height: 40,),

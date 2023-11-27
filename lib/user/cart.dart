@@ -284,33 +284,30 @@ class _CartScreenState extends State<CartScreen> {
                             padding: EdgeInsets.symmetric(
                               vertical: 10,
                             ),
-                            child: Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Icon(
-                                    CupertinoIcons.minus,
-                                    color: Colors.white,
-                                  ),
-                                  Text(
-                                    "2",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  Icon(
-                                    CupertinoIcons.plus,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
+                            child: Column(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                              children:  [
+                                // IconButton(
+                                //   CupertinoIcons.minus,
+                                //   color: Colors.white,
+                                // ),
+                                IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.minus),color: Colors.black,),
+
+                                Text(
+                                  "2",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color.fromARGB(255, 0, 0, 0)),
+                                ),
+                                // Icon(
+                                //   CupertinoIcons.plus,
+                                //   color: Colors.white,
+                                // )
+                                //  IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.plus)),
+
+                              ],
                             ),
                           )
                         ],

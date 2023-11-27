@@ -54,6 +54,7 @@ class _FavScreenState extends State<FavScreen> {
       appBar: AppBar(
         backgroundColor: Colors.redAccent.shade700,
         title: Text("Favorite"),
+        centerTitle: true,
         actions: const [
           Padding(
             padding: EdgeInsets.all(10.0),
@@ -84,7 +85,7 @@ class _FavScreenState extends State<FavScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => DetailScreen(
-                            itemName: name[index],
+                          
                           ),
                         ),
                       );

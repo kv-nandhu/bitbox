@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:clippy_flutter/arc.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({super.key, required String itemName});
+  const DetailScreen({super.key,});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();

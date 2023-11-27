@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_product.dart';
+part of '../models/user_product.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -17,23 +17,29 @@ class AddproductsAdapter extends TypeAdapter<Addproducts> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Addproducts(
-      name: fields[0] as String,
-      prize: fields[2] as String,
-      image: fields[3] as String,
-    )..id = fields[5] as int?;
+      name: fields[0] as String?,
+      prize: fields[1] as String?,
+      image: fields[2] as String?,
+      about: fields[3] as String?,
+      category: fields[4] as String?,
+      unit: fields[5] as String?,
+      id: fields[6] as int?, 
+    );
   }
 
   @override
   void write(BinaryWriter writer, Addproducts obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
-      ..writeByte(2)
+      ..writeByte(1)
       ..write(obj.prize)
-      ..writeByte(3)
+      ..writeByte(2)
       ..write(obj.image)
-      ..writeByte(5)
+      ..writeByte(3)
+      ..write(obj.about)
+      ..writeByte(4)
       ..write(obj.id);
   }
 

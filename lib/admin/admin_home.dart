@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:bitebox/admin/admin_product.dart';
+import 'package:bitebox/admin/product_list.dart';
 import 'package:bitebox/user/first_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,31 @@ class _AdminHomeState extends State<AdminHome> {
                     ),
                     onTap: () {
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (ctx) => AddProduct()));
+                          MaterialPageRoute(builder: (ctx) => AddProductPage()));
+                    },
+                  ),
+                ),
+                 SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: const Color.fromARGB(255, 0, 0, 0)),
+                  // clipBehavior: Clip.antiAlias,
+                  child: ListTile(
+                    title: Text(
+                      'Product List',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromARGB(255, 255, 255, 255)),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductListing()));
                     },
                   ),
                 ),

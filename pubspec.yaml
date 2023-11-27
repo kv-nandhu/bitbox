@@ -47,6 +47,8 @@ dependencies:
   clippy_flutter: ^2.0.0-nullsafety.1
   url_launcher: ^6.1.14
   image_picker: ^1.0.4
+  flutter_slidable: ^3.0.1
+  custom_text: ^1.1.0
 
 dev_dependencies:
   flutter_test:
