@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:bitebox/addfav.dart';
 import 'package:bitebox/function/addproduct_functions.dart';
 import 'package:bitebox/function/dbfun.dart';
 import 'package:bitebox/user/burger.dart';
@@ -252,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           IconButton(
                                             icon: Icon(Icons.favorite_border),
                                             onPressed: () {
-                                              // Handle favorite button tap
+                                              addfav_button(addproducts, context);
                                             },
                                           ),
                                           IconButton(
@@ -285,8 +285,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
-  void _details(context,String name, String prize, String image){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen()));
   }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:bitebox/user/first_screen.dart';
 import 'package:bitebox/user/login_screen.dart';
 import 'package:bitebox/models/user_login.dart';
 import 'package:flutter/material.dart';
@@ -161,7 +162,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()),
+                                  builder: (context) => SigninLogin()),
                             );
                           },
                           child: const Text(

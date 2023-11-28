@@ -1,6 +1,12 @@
 // ignore: file_names
+import 'dart:io';
+
+import 'package:bitebox/addfav.dart';
+import 'package:bitebox/function/addproduct_functions.dart';
+import 'package:bitebox/models/user_favorite.dart';
 import 'package:bitebox/user/cart.dart';
 import 'package:bitebox/user/rec_detailScreen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FavScreen extends StatefulWidget {
@@ -11,6 +17,12 @@ class FavScreen extends StatefulWidget {
 }
 
 class _FavScreenState extends State<FavScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getfavorite();
+  }
+
   List<AssetImage> image = [
     AssetImage('images/biri.jpg'),
     AssetImage('images/bur.jpg'),
@@ -66,106 +78,121 @@ class _FavScreenState extends State<FavScreen> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 20,bottom: 10),
+        padding: const EdgeInsets.only(top: 20, bottom: 10),
         child: Column(
           children: [
-            Expanded(
-              child: GridView.builder(
-                itemCount: 10,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12.0,
-                  mainAxisSpacing: 12.0,
-                  mainAxisExtent: 290,
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailScreen(
-                          
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                        color: Color.fromARGB(255, 255, 255, 255),
+            ValueListenableBuilder(
+                valueListenable: addfavlist,
+                builder:
+                    (context, List<Addfavorite> addfavlist, Widget? child) {
+                  return Expanded(
+                    child: GridView.builder(
+                      itemCount: addfavlist.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 12.0,
+                        mainAxisSpacing: 12.0,
+                        mainAxisExtent: 290,
                       ),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16.0),
-                              topRight: Radius.circular(16.0),
+                      itemBuilder: (context, index) {
+                        final addfav = addfavlist[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailScreen(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                              color: Color.fromARGB(255, 255, 255, 255),
                             ),
-                            child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                return Image(
-                  image: image[index],
-                  height: 170,
-                  width: constraints.maxWidth,
-                  fit: BoxFit.cover,
-                );
-              },
-            ),
-            
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  name[index],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium!
-                                      .merge(
-                                        const TextStyle(
-                                            fontWeight: FontWeight.w700),
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(16.0),
+                                    topRight: Radius.circular(16.0),
+                                  ),
+                                  child: LayoutBuilder(
+                                    builder: (BuildContext context,
+                                        BoxConstraints constraints) {
+                                      return Stack(
+                                        children: [
+                                          Image.file(
+                                            File(addfav.image!),
+                                            height: 170,
+                                            width: constraints.maxWidth,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        addfav.name!,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium!
+                                            .merge(
+                                              const TextStyle(
+                                                  fontWeight: FontWeight.w700),
+                                            ),
                                       ),
-                                ),
-                                const SizedBox(
-                                  height: 8.0,
-                                ),
-                                Text(rate[index]),
-                                const SizedBox(
-                                  height: 8.0,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(Icons.favorite,color: Colors.red,),
-                                      onPressed: () {
-                                        // Handle favorite button tap
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.shopping_cart_outlined),
-                                      onPressed: () {
-                                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => CartScreen()));
-                                      },
-                                    ),
-                                  ],
+                                      const SizedBox(
+                                        height: 8.0,
+                                      ),
+                                      Text(addfav.prize!),
+                                      const SizedBox(
+                                        height: 8.0,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
+                                            ),
+                                            onPressed: () {
+                                             deletefav(addfav.id!);
+                                            },
+                                          ),
+                                          IconButton(
+                                            icon: Icon(
+                                                Icons.shopping_cart_outlined),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          CartScreen()));
+                                            },
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 )
                               ],
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        );
+                      },
                     ),
                   );
-                },
-              ),
-            )
-      
-            //
+                })
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:bitebox/models/user_favorite.dart';
 import 'package:bitebox/user/splash_screen.dart';
 import 'package:bitebox/models/user_login.dart';
 import 'package:bitebox/models/user_product.dart';
@@ -19,6 +20,10 @@ void main() async {
   if (!Hive.isAdapterRegistered(AddproductsAdapter().typeId)) {
     Hive.registerAdapter(AddproductsAdapter());
   }
+  if (!Hive.isAdapterRegistered(AddfavoriteAdapter().typeId)) {
+  Hive.registerAdapter(AddfavoriteAdapter());
+}
+  
   runApp(const MyApp());
 }
 

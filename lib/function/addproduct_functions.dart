@@ -1,25 +1,27 @@
-// import 'package:bitebox/models/user_product.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
-
-// import '../admin/product_list.dart';
-
-
+import 'package:bitebox/models/user_favorite.dart';
+import 'package:bitebox/models/user_product.dart';
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 
-// Future<void> addproduct(Addproducts value) async {
-//   final productDB = await Hive.openBox<Addproducts>('add_product');
-//   final _addproduct = await productDB.add(value);
-//   value.id = _addproduct;
-//   productlist.value.add(value);
-//   productlist.notifyListeners();
-// }
 
-// Future<void> getproducts() async {
-//   final productDB = await Hive.openBox<Addproducts>('add_product');
-//   productlist.value.clear();
-//   productlist.value.addAll(productDB.values);
-//   productlist.notifyListeners();
-// }
+
+ValueNotifier<List<Addfavorite>>addfavlist = ValueNotifier([]);
+
+Future<void> addtofav(Addfavorite value) async {
+  final addfavDB = await Hive.openBox<Addfavorite>('add_fav');
+  final _addfav = await addfavDB.add(value);
+  value.id = _addfav;
+  addfavlist.value.add(value);
+  addfavlist.notifyListeners();
+}
+
+Future<void> getfavorite() async {
+  final addfavbox = await Hive.openBox<Addfavorite>('add_fav');
+  addfavlist.value.clear();
+  addfavlist.value.addAll(addfavbox.values);
+  addfavlist.notifyListeners();
+}
 
 
 
