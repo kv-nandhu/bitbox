@@ -1,4 +1,5 @@
 import 'package:bitebox/user/home_screen.dart';
+import 'package:bitebox/user/main_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +75,7 @@ class _CnfrmPageState extends State<CnfrmPage> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomeScreen()));
+                              builder: (context) => HomesScreenPage()));
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(255, 255, 255, 255),

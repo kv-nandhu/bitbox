@@ -1,9 +1,10 @@
 // ignore: file_names
 import 'dart:io';
 
-import 'package:bitebox/addfav.dart';
+import 'package:bitebox/function/addfav.dart';
 import 'package:bitebox/function/addproduct_functions.dart';
 import 'package:bitebox/models/user_favorite.dart';
+import 'package:bitebox/models/user_product.dart';
 import 'package:bitebox/user/cart.dart';
 import 'package:bitebox/user/rec_detailScreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,49 +18,13 @@ class FavScreen extends StatefulWidget {
 }
 
 class _FavScreenState extends State<FavScreen> {
+
+
   @override
   void initState() {
     super.initState();
     getfavorite();
   }
-
-  List<AssetImage> image = [
-    AssetImage('images/biri.jpg'),
-    AssetImage('images/bur.jpg'),
-    AssetImage('images/burg.jpg'),
-    AssetImage('images/chick.jpg'),
-    AssetImage('images/masa.jpg'),
-    AssetImage('images/piza.jpg'),
-    AssetImage('images/burge.jpg'),
-    AssetImage('images/drink.jpg'),
-    AssetImage('images/piza.jpg'),
-    AssetImage('images/biri.jpg'),
-  ];
-  List<String> name = [
-    'Biriyani',
-    'Fluff Screamer',
-    'Slugburger',
-    'chicken',
-    'Masala Dosa',
-    'Neapolitan Piza',
-    'Luther Burger',
-    'Fritz Kola & Fritz Limo',
-    'Detroit Pizza',
-    'chicken Biriyani',
-  ];
-
-  List<String> rate = [
-    '₹100.0',
-    '₹250.0',
-    '₹200.0',
-    '₹650.0',
-    '₹60.0',
-    '₹600.0',
-    '₹300.0',
-    '₹40.0',
-    '₹750.0',
-    '₹100.0',
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,10 +49,10 @@ class _FavScreenState extends State<FavScreen> {
             ValueListenableBuilder(
                 valueListenable: addfavlist,
                 builder:
-                    (context, List<Addfavorite> addfavlist, Widget? child) {
+                    (context, List<Addfavorite> addfvp, Widget? child) {
                   return Expanded(
                     child: GridView.builder(
-                      itemCount: addfavlist.length,
+                      itemCount: addfvp.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 12.0,
@@ -95,15 +60,15 @@ class _FavScreenState extends State<FavScreen> {
                         mainAxisExtent: 290,
                       ),
                       itemBuilder: (context, index) {
-                        final addfav = addfavlist[index];
+                        final addfav = addfvp[index];
                         return GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailScreen(),
-                              ),
-                            );
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => DetailScreen(products: addproducts,),
+                              // ),
+                            // );
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -167,6 +132,7 @@ class _FavScreenState extends State<FavScreen> {
                                             ),
                                             onPressed: () {
                                              deletefav(addfav.id!);
+                                             
                                             },
                                           ),
                                           IconButton(

@@ -1,21 +1,14 @@
 import 'dart:io';
-import 'package:bitebox/addfav.dart';
-import 'package:bitebox/function/addproduct_functions.dart';
+import 'package:bitebox/function/addfav.dart';
 import 'package:bitebox/function/dbfun.dart';
-import 'package:bitebox/user/burger.dart';
 import 'package:bitebox/user/cart.dart';
 import 'package:bitebox/user/categories_screen.dart';
-import 'package:bitebox/user/dinner.dart';
-import 'package:bitebox/user/drinks.dart';
-import 'package:bitebox/user/lunch.dart';
-import 'package:bitebox/user/piza.dart';
 import 'package:bitebox/user/rec_detailScreen.dart';
 import 'package:bitebox/models/user_product.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
 
-import '../admin/product_list.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -48,15 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
     'Burger',
     'Drinks',
     'Piza',
-    // 'Other',
-  ];
-  List Nav = [
-    CatBreakfast(),
-    CatLunch(),
-    CatDinner(),
-    CatBurger(),
-    CatDrinks(),
-    CatPiza()
   ];
   @override
   Widget build(BuildContext context) {
@@ -145,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Nav[index]));
+                              builder: (context) => CatBreakfast(categorys: names[index])));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -197,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         final addproducts = addlist[index];
                         return GestureDetector(
                           onTap: () {
-                            // _details(context, addproducts.name, addproducts.prize,   addproducts.image);
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen( products: addproducts,)));
                           },
                           child: Container(
                             decoration: BoxDecoration(

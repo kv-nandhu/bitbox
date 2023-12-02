@@ -24,7 +24,8 @@ void main() async {
   Hive.registerAdapter(AddfavoriteAdapter());
 }
   
-  runApp(const MyApp());
+  runApp(
+     MyApp());
 }
 
 class MyApp extends StatelessWidget {

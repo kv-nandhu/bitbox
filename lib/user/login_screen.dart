@@ -148,7 +148,7 @@ class LoginScreen extends StatelessWidget {
     if (user != null) {
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomesScreen()));
+          context, MaterialPageRoute(builder: (context) => HomesScreenPage()));
     } else {
       // ignore: use_build_context_synchronously
       showDialog(

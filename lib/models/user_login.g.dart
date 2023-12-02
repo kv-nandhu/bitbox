@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../models/user_login.dart';
+part of 'user_login.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator

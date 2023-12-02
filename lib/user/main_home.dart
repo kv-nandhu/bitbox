@@ -4,14 +4,14 @@ import 'package:bitebox/user/orders_screen.dart';
 import 'package:bitebox/user/profile.dart';
 import 'package:flutter/material.dart';
 
-class HomesScreen extends StatefulWidget {
-  const HomesScreen({super.key});
+class HomesScreenPage extends StatefulWidget {
+  const HomesScreenPage({super.key});
 
   @override
-  State<HomesScreen> createState() => _HomesScreenState();
+  State<HomesScreenPage> createState() => _HomesScreenPageState();
 }
 
-class _HomesScreenState extends State<HomesScreen> {
+class _HomesScreenPageState extends State<HomesScreenPage> {
   int indexNum = 0;
   List tabWidgets = [
     HomeScreen(),

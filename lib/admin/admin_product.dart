@@ -26,6 +26,7 @@ class _AddProductPageState extends State<AddProductPage> {
  late  String _productCategory;
  File? imageSelect;
 
+
  List<String> categories = [
     'Break fast',
     'Lunch',
@@ -162,7 +163,8 @@ class _AddProductPageState extends State<AddProductPage> {
                 ),
                 Row(
                   children: [
-                    SizedBox(
+                  
+                        SizedBox(
                       width: 10,
                     ),
                     Container(
@@ -270,7 +272,7 @@ String? validateProductUnit(String? value) {
     final _prize = _productprizeController.text.trim();
      final _unit = _productunitController.text.trim();
     final _about = _productaboutController.text.trim();
-    final _category = _productCategory;
+    final _category = _productCategory.toString();
     
 
     if (imageSelect==null){
@@ -279,7 +281,7 @@ String? validateProductUnit(String? value) {
  
     
     if (_formKey.currentState!.validate() &&
-        _name.isNotEmpty&& _prize.isNotEmpty ) {
+        _name.isNotEmpty&& _prize.isNotEmpty && _unit.isNotEmpty && _about.isNotEmpty && _category.isNotEmpty) {
       final _add = Addproducts(
         id: -1,
           name: _name,
@@ -288,6 +290,7 @@ String? validateProductUnit(String? value) {
           about: _about,
           category: _category,       
           image: imageSelect!.path.toString(),
+
         );
        help.save(_add);
       showSnackBar(context, 'Added Succesfully!');

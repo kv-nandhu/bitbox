@@ -1,9 +1,9 @@
 // ignore: file_names
 import 'package:hive/hive.dart';
-part '../function/user_product.g.dart';
+// part 'user_product.g.dart';
+part 'user_product.g.dart'; 
 
-
-@HiveType(typeId: 2)
+@HiveType(typeId:4)
 class Addproducts extends HiveObject {
   @HiveField(0)
   String? name;
