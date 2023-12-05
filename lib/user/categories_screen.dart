@@ -85,7 +85,7 @@ class _CatBreakfastState extends State<CatBreakfast> {
                                       Text(
                                         '${addproducts.name}',
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 16, 
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black),
                                       ),

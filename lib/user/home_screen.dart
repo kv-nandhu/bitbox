@@ -17,13 +17,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var dbp=dbhelper();
+  var dbp = dbhelper();
   @override
   void initState() {
     super.initState();
     dbp.getall();
   }
- 
+
   icon() => null;
   List<AssetImage> assetimage = [
     AssetImage('images/break.jpg'),
@@ -116,7 +116,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Categories',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                 )),
-      
             SizedBox(
               height: 100,
               child: ListView.builder(
@@ -129,7 +128,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CatBreakfast(categorys: names[index])));
+                              builder: (context) =>
+                                  CatBreakfast(categorys: names[index])));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -153,9 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
-              
             ),
-      
             Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -181,7 +179,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         final addproducts = addlist[index];
                         return GestureDetector(
                           onTap: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen( products: addproducts,)));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailScreen(
+                                          products: addproducts,
+                                        )));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -199,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     File(
                                       addproducts.image!,
                                     ),
-      
+
                                     // image: image[index],
                                     height: 170,
                                     width: double.infinity,
@@ -236,7 +239,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           IconButton(
                                             icon: Icon(Icons.favorite_border),
                                             onPressed: () {
-                                              addfav_button(addproducts, context);
+                                              addfav_button(
+                                                  addproducts, context);
                                             },
                                           ),
                                           IconButton(
@@ -263,11 +267,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 })
-      
-            //
           ],
         ),
       ),
     );
   }
 }
+106744040053
