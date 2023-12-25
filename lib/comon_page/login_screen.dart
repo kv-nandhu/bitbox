@@ -1,10 +1,12 @@
 import 'package:bitebox/user/main_home.dart';
-import 'package:bitebox/user/sign_screen.dart';
+import 'package:bitebox/comon_page/sign_screen.dart';
 import 'package:bitebox/models/user_login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+// ignore: constant_identifier_names
+const SAVE_KEY = 'saveUserEmail';
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -88,8 +90,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey,
-                        onPrimary: Colors.black,
+                        foregroundColor: Colors.black, backgroundColor: Colors.grey,
                       ),
                       onPressed: () {
                         login(emailController.text, passwordController.text,
@@ -134,9 +135,7 @@ class LoginScreen extends StatelessWidget {
   void login(String email, String password, BuildContext context) async {
     final usersBox =
         await Hive.openBox<User>('users'); // Open the Hive box for users
-
     User? user;
-
     for (var i = 0; i < usersBox.length; i++) {
       final currentUser = usersBox.getAt(i);
       if (currentUser?.email == email && currentUser?.password == password) {
@@ -144,7 +143,6 @@ class LoginScreen extends StatelessWidget {
         break;
       }
     }
-
     if (user != null) {
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
@@ -168,4 +166,36 @@ class LoginScreen extends StatelessWidget {
       );
     }
   }
+}
+//logout button
+void logout(BuildContext context) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Logout'),
+          content: Text('Do you want to logout...?'),
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  signout(context);
+                },
+                child: Text('Yes')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('No'))
+          ],
+        );
+      });
+}
+
+//signoutfuntion
+signout(BuildContext context) async {
+  // ignore: no_leading_underscores_for_local_identifiers
+  final _sharedPrefs = await SharedPreferences.getInstance();
+  await _sharedPrefs.clear();
+  Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (ctx) => LoginScreen()), (route) => false);
 }

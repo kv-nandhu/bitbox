@@ -1,7 +1,7 @@
 // ignore: file_names
 import 'package:bitebox/admin/admin_login.dart';
-import 'package:bitebox/user/login_screen.dart';
-import 'package:bitebox/user/sign_screen.dart';
+import 'package:bitebox/comon_page/login_screen.dart';
+import 'package:bitebox/comon_page/sign_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

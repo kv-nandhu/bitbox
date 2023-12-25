@@ -1,5 +1,4 @@
 import 'package:bitebox/models/user_favorite.dart';
-import 'package:bitebox/models/user_product.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

@@ -1,13 +1,14 @@
 // ignore: file_names
 import 'dart:io';
 
+import 'package:bitebox/function/addcart_button.dart';
+import 'package:bitebox/user/address_screen.dart';
 import 'package:bitebox/user/payment_page.dart';
 import 'package:bitebox/user/cart.dart';
-import 'package:bitebox/user/payment_screen.dart';
+import 'package:bitebox/orderspeges/payment_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:clippy_flutter/arc.dart';
-
 import '../models/user_product.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -19,6 +20,22 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+    int quantity = 1;
+
+  void incrementQuantity() {
+    setState(() {
+      quantity++;
+    });
+  }
+
+  void decrementQuantity() {
+    setState(() {
+      if (quantity > 1) {
+        quantity--;
+      }
+    });
+  }
+
   icon() => null;
 
   @override
@@ -46,7 +63,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 height: 50,
                 child: Container(
                   
-                  height: 350,
+                  height: 400,
                   width: double.infinity,
                   color: Color.fromARGB(255, 213, 211, 211),
                   child: Padding(
@@ -91,7 +108,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                 
                                 children: [
                                   Container(
-                                    width: 90,
+                                    width: 120,
+                                    height: 40,
                                     padding: EdgeInsets.all(5),
                                     decoration: BoxDecoration(
                                       color: Colors.red,
@@ -100,24 +118,26 @@ class _DetailScreenState extends State<DetailScreen> {
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
-                                      children: const [
-                                        Icon(
-                                          CupertinoIcons.minus,
-                                          color: Colors.white,
-                                          size: 20,
-                                        ),
-                                        Text(
-                                          "1",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Icon(
-                                          CupertinoIcons.plus,
-                                          color: Colors.white,
-                                          size: 20,
-                                        )
+                                      children: [
+                                    
+                                        IconButton(onPressed: () {
+                                          setState(() {
+                                            decrementQuantity();
+                                          });
+                                        },
+                                        icon: Icon(CupertinoIcons.minus)),
+                                         Text(
+                                              quantity.toString(),
+                                              style: const TextStyle(
+                                               fontSize: 15, color: Colors.white),
+                                                 ),
+                                                 
+                                              IconButton(onPressed: () {
+                                          setState(() {
+                                         incrementQuantity();
+                                          });
+                                        },
+                                        icon: Icon(CupertinoIcons.plus)),
                                       ],
                                     ),
                                   ),
@@ -197,8 +217,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     // width: 200,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => CartScreen()));
+                      setState(() {
+                        checkCart(widget.products, context);
+                      });
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.redAccent.shade700,
@@ -221,10 +242,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       // width: 400,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PaymentPage()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewAddress(total: int.parse(widget.products.prize!),)));
                         },
                         style: ElevatedButton.styleFrom(
                           // ignore: deprecated_member_use

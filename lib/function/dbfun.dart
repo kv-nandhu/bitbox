@@ -12,7 +12,7 @@ String dbname = 'dbname';
 ValueNotifier<List<User>> userslist = ValueNotifier([]);
 
 class dbhelper {
-  Future<void> delete(int id) async {
+    Future<void> delete(int id) async {
     final remove = await Hive.openBox<Addproducts>(dbname);
     remove.delete(id);
     getall();

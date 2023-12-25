@@ -1,13 +1,9 @@
 // ignore: file_names
 import 'dart:io';
-
 import 'package:bitebox/function/addfav.dart';
 import 'package:bitebox/function/addproduct_functions.dart';
 import 'package:bitebox/models/user_favorite.dart';
-import 'package:bitebox/models/user_product.dart';
 import 'package:bitebox/user/cart.dart';
-import 'package:bitebox/user/rec_detailScreen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FavScreen extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-part '../function/user_favorite.g.dart';
+part 'user_favorite.g.dart';
 
 @HiveType(typeId: 3)
 class Addfavorite extends HiveObject {

@@ -1,8 +1,11 @@
 // ignore: file_names
 import 'package:bitebox/admin/admin_product.dart';
 import 'package:bitebox/admin/product_list.dart';
-import 'package:bitebox/user/first_screen.dart';
+import 'package:bitebox/admin/userlist.dart';
+import 'package:bitebox/main.dart';
+import 'package:bitebox/comon_page/first_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
@@ -97,7 +100,9 @@ class _AdminHomeState extends State<AdminHome> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => UsersListScreen()));
+                    },
                   ),
                 ),
                 SizedBox(
@@ -135,10 +140,11 @@ class _AdminHomeState extends State<AdminHome> {
                           color: const Color.fromARGB(255, 255, 255, 255)),
                     ),
                     onTap: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SigninLogin()));
+                      AdminLogout(context);
+                      // Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => SigninLogin()));
                     },
                   ),
                 )
@@ -148,5 +154,26 @@ class _AdminHomeState extends State<AdminHome> {
         ),
       ),
     );
+  }
+    void AdminLogout(BuildContext context){
+    showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: Text('Logout'),
+        content:Text('You Want Logout application'),
+        actions: [
+          ElevatedButton(onPressed: (){
+            Logouting(context);
+          }, child: Text('YES')),
+          ElevatedButton(onPressed: (){
+            Navigator.pop(context);
+          },
+           child: Text('NO')),
+      ]);
+    });
+  }
+    void Logouting(BuildContext ctx)async{
+   Navigator.push(ctx, MaterialPageRoute(builder: (ctx)=>SigninLogin()));
+ final _shared =await SharedPreferences.getInstance();
+ _shared.setBool(SAVE_KEY, false);
   }
 }

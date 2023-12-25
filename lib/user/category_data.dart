@@ -1,77 +1,55 @@
-// class products {
-//   final String? name;
-//   final String? unit;
-//   final String? rate;
-//   final String? stock;
-//   final String? imagesp;
+// class Addressvalidator() {
+// String? _validateAddress(String? value) {
+//     String addressRegex = r'^[a-zA-Z]+';
+//     RegExp regex = RegExp(addressRegex);
+//     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
+//       return 'This fiels is Empty';
+//     }
+//     return null;
+//   }
 
-//   products(
-//       {required this.name,
-//       required this.unit,
-//       required this.rate,
-//       required this.stock,
-//       required this.imagesp});
+//   String? _validateName(String? value) {
+//     String nameRegex = r'^[a-zA-Z ]+$';
+//     RegExp regex = RegExp(nameRegex);
+//     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
+//       return 'This field id empty';
+//     }
+//     return null;
+//   }
+
+//   String? _validatePhoneNumber(String? value) {
+//     String phoneRegex = r'^[6-9][0-9]{9}$';
+//     RegExp regex = RegExp(phoneRegex);
+//     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
+//       return 'Enter a valid 10-digit phone number';
+//     }
+//     return null;
+//   }
+
+//   String? _validateAddresss(String? value) {
+//     String addresssRegex = r'^[0-9]{6,}$';
+//     RegExp regex = RegExp(addresssRegex);
+//     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
+//       return 'This field is empty';
+//     }
+//     return null;
+//   }
+
+//   String? _validateCity(String? value) {
+//     String cityRegex = r'^[0-9]{6,}$';
+//     RegExp regex = RegExp(cityRegex);
+//     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
+//       return 'fill in the field';
+//     }s
+//     return null;
+//   }
+
+//   String? _validatePincode(String? value) {
+//     String pincodeRegex = r'^[0-9]{6,}$';
+//     RegExp regex = RegExp(pincodeRegex);
+//     if (value == null || value.isEmpty || !regex.hasMatch(value)) {
+//       return 'enter the valid pincode';
+//     }
+//     return null;
+//   }
 // }
-
-// List pd = [
-//   products(
-//       name: 'biriyani',
-//       unit: '10',
-//       rate: '100',
-//       stock: 'In Stock',
-//       imagesp: 'images/biri.jpg'),
-//   products(
-//       name: 'Fluff screamer',
-//       unit: '12',
-//       rate: '250',
-//       stock: 'In Stock',
-//       imagesp: 'images/bur.jpg'),
-//   products(
-//       name: 'Slug Burger',
-//       unit: '0',
-//       rate: '200',
-//       stock: 'no Stock',
-//       imagesp: 'images/br.jpg'),
-//   products(
-//       name: 'Neapoltan Piza',
-//       unit: '4',
-//       rate: '800',
-//       stock: 'In Stock',
-//       imagesp: 'images/piz.jpg'),
-//   products(
-//       name: 'Fritz Kola & Fritz Limo',
-//       unit: '2',
-//       rate: '40',
-//       stock: 'In Stock',
-//       imagesp: 'images/drink.jpg'),
-//   products(
-//       name: 'Luther Burger',
-//       unit: '7',
-//       rate: '300',
-//       stock: 'In Stock',
-//       imagesp: 'images/bur.jpg'),
-//   products(
-//       name: 'Burger',
-//       unit: '3',
-//       rate: '600',
-//       stock: 'In Stock',
-//       imagesp: 'images/burg.jpg'),
-//   products(
-//       name: 'chicken Biriyani',
-//       unit: '4',
-//       rate: '120',
-//       stock: 'In Stock',
-//       imagesp: 'images/chick.jpg'),
-//   products(
-//       name: 'rice',
-//       unit: '0',
-//       rate: '120',
-//       stock: 'no Stock',
-//       imagesp: 'images/lunch.jpg'),
-//   products(
-//       name: 'combo choclate',
-//       unit: '3',
-//       rate: '1499',
-//       stock: 'In Stock',
-//       imagesp: 'images/masa.jpg'),
-// ];

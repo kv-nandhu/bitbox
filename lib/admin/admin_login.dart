@@ -1,4 +1,5 @@
 import 'package:bitebox/admin/admin_home.dart';
+import 'package:bitebox/comon_page/first_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,13 +14,13 @@ class AdminLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-            Color.fromARGB(255, 176, 39, 39),
-            Color.fromARGB(255, 0, 0, 0)
+            Color.fromARGB(255, 255, 255, 255),
+            Color.fromARGB(255, 188, 187, 187)
           ])),
       child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -34,7 +35,7 @@ class AdminLogin extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.w900,
-                        color: Colors.white,
+                        color: const Color.fromARGB(255, 33, 31, 31),
                         fontStyle: FontStyle.italic),
                   ),
                   SizedBox(
@@ -119,4 +120,5 @@ class AdminLogin extends StatelessWidget {
       ));
     }
   }
+  
 }
