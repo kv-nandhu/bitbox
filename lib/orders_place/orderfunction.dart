@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
-import 'package:bitebox/orderspeges/order_model.dart';
+import 'package:bitebox/orders_place/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -17,7 +17,7 @@ Future<void> addtoorder(Oredrplace value) async {
           id: id,
           productName: data!.productName,
           productPrice: data.productPrice,
-          productDetails: data.productDetails,
+          productabout: data.productabout,
           productImage: data.productImage,
           totalPrice: data.totalPrice,
           productCount: data.productCount,

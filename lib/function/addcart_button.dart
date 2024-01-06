@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_import
 
-import 'package:bitebox/function/cartdbhelper.dart';
 import 'package:bitebox/models/cart_model.dart';
-import 'package:bitebox/models/user_product.dart';
 import 'package:bitebox/user/cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +8,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 
 
-void checkCart(Addproducts addproducts, BuildContext context) async {
-
-  await Hive.openBox<Cart>('cart');
+void checkCart( addproducts, BuildContext context) async {
+// await Hive.openBox<Cart>('cart');
+  
 
   final cartBox = Hive.box<Cart>('cart');
 

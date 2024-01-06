@@ -26,7 +26,7 @@ class Addproducts extends HiveObject {
   @HiveField(6)
   int? id;
 
-  Addproducts(
+  Addproducts( 
     {
     required this.name,
      required this.prize,

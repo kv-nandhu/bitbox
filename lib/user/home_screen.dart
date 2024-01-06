@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:bitebox/function/addfav.dart';
-import 'package:bitebox/function/appbar.dart';
+import 'package:bitebox/models/cart_model.dart';
+import 'package:bitebox/whishlist/addfav.dart';
 import 'package:bitebox/function/dbfun.dart';
 import 'package:bitebox/models/user_product.dart';
 import 'package:bitebox/user/cart.dart';
@@ -13,20 +13,28 @@ import '../function/addcart_button.dart';
 dbhelper help = dbhelper();
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchcontrol = TextEditingController();
- late Box<Addproducts> cartBox = Hive.box<Addproducts>(dbname);
+  late Box<Addproducts> productBox = Hive.box<Addproducts>(dbname);
+   late Box<Cart> cartBox = Hive.box<Cart>('cart');
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    initializeData();
+  }
+
+  Future<void> initializeData() async {
+    await Hive.openBox<Addproducts>(dbname);
+    productBox = Hive.box<Addproducts>(dbname);
     help.getall();
   }
+
   var dbp = dbhelper();
   List<AssetImage> assetimage = [
     AssetImage('images/break.jpg'),
@@ -46,6 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(microseconds: 1), () {
+      setState(() {});
+    });
+    //  final themeChange =Provider.of<DarkThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         shape: RoundedRectangleBorder(
@@ -54,15 +66,43 @@ class _HomeScreenState extends State<HomeScreen> {
                     MediaQuery.of(context).size.width, 70.0))),
         backgroundColor: Colors.redAccent.shade700,
         actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
-              );
-            },
-            child: Icon(Icons.shopping_cart_outlined, color: Colors.black),
-          ),
+          // GestureDetector(
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => CartScreen()),
+          //     );
+          //   },
+             Stack(
+               children: [
+                           IconButton(onPressed: () {
+                setState(() {
+                     Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CartScreen()),
+                );
+                });
+                           }, icon: Icon(Icons.shop_2_outlined),
+                           ),
+                           Positioned(
+                            top: 8.0,
+                            right: 8.0,
+                            child: Container(
+                            padding: EdgeInsets.all(4.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                            child: Text(
+                              '${cartBox.length}',
+                              style: TextStyle(
+                                color: Colors.white,fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                           ))
+                         ],
+             ),
+          
           Padding(
             padding: EdgeInsets.only(left: 10, right: 15),
             child: CircleAvatar(
@@ -101,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(75),
-          child: Container(
+          child: SizedBox(
             height: 76,
             child: Container(
               width: double.infinity,
@@ -213,6 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   ValueListenableBuilder(
+                    
                     valueListenable: productlist,
                     builder:
                         (context, List<Addproducts> addlist, Widget? child) {
@@ -268,7 +309,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           addproducts.name!,
                                           style: Theme.of(context)
                                               .textTheme
-                                              .subtitle1!
+                                              .titleMedium!
                                               .merge(
                                                 const TextStyle(
                                                   fontWeight: FontWeight.w700,
@@ -286,11 +327,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            IconButton(
-                                              icon: Icon(Icons.favorite_border),
-                                              onPressed: () {
-                                                addfav_button(
-                                                    addproducts, context);
+                                            FutureBuilder<Icon>(
+                                              future: getIcon(addproducts),
+                                              builder: (context, snapshot) {
+                                                if (snapshot.connectionState ==
+                                                    ConnectionState.done) {
+                                                  return IconButton(
+                                                    icon: snapshot.data!,
+                                                    onPressed: () {
+                                                      addfav_button(
+                                                          addproducts, context);
+                                                    },
+                                                  );
+                                                } else {
+                                                  // Return a loading indicator or a placeholder widget if needed
+                                                  return CircularProgressIndicator();
+                                                }
                                               },
                                             ),
                                             IconButton(
@@ -324,8 +376,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   void searchProducts(String value) {
-    final product = cartBox.values.toList();
+    final product = productBox.values.toList();
     final filteredProducts = product
         .where((products) =>
             products.name!.toLowerCase().contains(value.toLowerCase()))

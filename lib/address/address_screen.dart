@@ -1,10 +1,9 @@
 import 'package:bitebox/function/address_function.dart';
 import 'package:bitebox/function/addressedit.dart';
 import 'package:bitebox/models/address_model.dart';
-import 'package:bitebox/user/add_address.dart';
-import 'package:bitebox/user/addressedit.dart';
-import 'package:bitebox/user/payment_page.dart';
-import 'package:bitebox/orderspeges/payment_screen.dart';
+import 'package:bitebox/orders_place/payment_screen.dart';
+import 'package:bitebox/address/add_address.dart';
+import 'package:bitebox/address/addressedit.dart';
 import 'package:flutter/material.dart';
 
 

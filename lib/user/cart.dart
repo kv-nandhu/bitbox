@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:bitebox/function/addcart_button.dart';
 import 'package:bitebox/function/cartdbhelper.dart';
 import 'package:bitebox/models/cart_model.dart';
-import 'package:bitebox/user/address_screen.dart';
+import 'package:bitebox/address/address_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -23,16 +23,15 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  final Box<Cart> cartBox = Hive.box<Cart>('cart');
+ 
+  late Box<Cart> cartBox = Hive.box<Cart>('cart');
   int total = 0;
 
   @override
   void initState() {
     super.initState();
   chelp.getall();
-    Future.delayed(Duration(microseconds: 1), () {
-      setState(() {});
-    });
+   
   }
 
   @override
@@ -40,7 +39,9 @@ class _CartScreenState extends State<CartScreen> {
     super.didUpdateWidget(oldWidget);
   }
 
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { Future.delayed(Duration(microseconds: 1), () {
+      setState(() {});
+    });
     total = 0;
 
     return Scaffold(
@@ -157,7 +158,7 @@ class _CartScreenState extends State<CartScreen> {
                                           SizedBox(
                                             height: 15,
                                           ),
-                                          Text(cart.prize!),
+                                          Text('₹${cart.prize!}'),
                                    
                                         ],
                                       ),
@@ -250,7 +251,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 ),
                                 Text(
-                                  total.toString(),
+                                  '₹${total.toString()}',
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ],
@@ -292,7 +293,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "${total + 50}", // Assuming total is the correct variable
+                                  "₹${total + 50}", // Assuming total is the correct variable
                                   style: TextStyle(
                                       fontSize: 20, color: Colors.red),
                                 ),
@@ -311,7 +312,17 @@ class _CartScreenState extends State<CartScreen> {
                   width: 400,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewAddress(total: total,)));
+                      if (cartBox.isNotEmpty) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (ctx) => ViewAddress(
+                                                  total: total,
+                                                )));
+                                  } else {
+                                    Navigator.pop(context);
+                                    showDailogealert(context);
+                                  }
                     },
                     style: ElevatedButton.styleFrom(
                       // ignore: deprecated_member_use
@@ -330,5 +341,25 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
         ));
+  }
+  void showDailogealert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Cart was Empty',
+          ),
+          content: Text('You need to add a Product '),
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'))
+          ],
+        );
+      },
+    );
   }
 }

@@ -28,7 +28,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         centerTitle: true,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: Colors.redAccent.shade700,
         title: Text(
           "Add Address",
           style: GoogleFonts.rubik(color: Colors.black),

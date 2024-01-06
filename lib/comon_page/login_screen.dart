@@ -1,12 +1,11 @@
-import 'package:bitebox/user/main_home.dart';
 import 'package:bitebox/comon_page/sign_screen.dart';
 import 'package:bitebox/models/user_login.dart';
+import 'package:bitebox/user/main_home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // ignore: constant_identifier_names
-const SAVE_KEY = 'saveUserEmail';
 // ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -144,6 +143,8 @@ class LoginScreen extends StatelessWidget {
       }
     }
     if (user != null) {
+      final _sharedPrefs = await SharedPreferences.getInstance();
+      _sharedPrefs.setBool("saveUserEmail", true);
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => HomesScreenPage()));
@@ -166,36 +167,9 @@ class LoginScreen extends StatelessWidget {
       );
     }
   }
+  Future<void> saveUserEmail(String email) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('currentUser', email);
+  }
 }
 //logout button
-void logout(BuildContext context) {
-  showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Logout'),
-          content: Text('Do you want to logout...?'),
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  signout(context);
-                },
-                child: Text('Yes')),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('No'))
-          ],
-        );
-      });
-}
-
-//signoutfuntion
-signout(BuildContext context) async {
-  // ignore: no_leading_underscores_for_local_identifiers
-  final _sharedPrefs = await SharedPreferences.getInstance();
-  await _sharedPrefs.clear();
-  Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (ctx) => LoginScreen()), (route) => false);
-}

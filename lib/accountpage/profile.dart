@@ -1,8 +1,12 @@
-import 'package:bitebox/user/edit_profile.dart';
+import 'package:bitebox/accountpage/edit_profile.dart';
+import 'package:bitebox/accountpage/more_info.dart';
 import 'package:bitebox/comon_page/first_screen.dart';
+import 'package:bitebox/dark_mode/theme_provider.dart';
 import 'package:bitebox/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,11 +15,12 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
      var val = false;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent.shade700,
-        title: Text("Profile"),
+        title: Text("Account"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -63,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
                   },
                   leading: Icon(
                     Icons.person,
-                    color: Colors.black,
+                    //color: Colors.black,
                   ),
                   trailing: Icon(
                     Icons.arrow_forward_ios,
@@ -116,7 +121,9 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(18)),
                 child: ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AboutScreen()));
+                  },
                   leading: Icon(
                     Icons.more_horiz_sharp,
                     color: Colors.black,
@@ -133,37 +140,39 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(18)),
-                child: ListTile(
-                  onTap: () {},
-                  leading: Icon(
-                    Icons.dark_mode,
-                    color: Colors.black,
-                  ),
-                trailing: Switch(
-                    value: val,
-                    onChanged: (index) {
-                      setState(() {
-                        val = index;
-                      });
-                    },
-                  ),
-                  title: Text(
-                    'Dark Mode',
-                    style:
-                        GoogleFonts.poppins(color: Colors.black, fontSize: 17),
+            // Padding(
+            //   padding: const EdgeInsets.all(8),
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //         border: Border.all(
+            //           color: Colors.black,
+            //         ),
+            //         borderRadius: BorderRadius.circular(18)),
+            //     child: ListTile(
+            //       onTap: () {},
+            //       leading: Icon(
+            //         Icons.dark_mode,
+            //         color: Colors.black,
+            //       ),
+            //       trailing: Transform.scale(
+            //     scale: 0.8,
+            //     child: CupertinoSwitch(
+            //       activeColor:  Colors.tealAccent.shade400,
+            //       value: themeChange.darkTheme,
+            //       onChanged: (bool value) => 
+            //       themeChange.darkTheme =value
+                  
+            //     ),
+            //   ),
+            //       title: Text(
+            //         'Dark Mode',
+            //         style:
+            //             GoogleFonts.poppins(color: Colors.black, fontSize: 17),
                          
-                  ),
-                ),
-              ),
-            ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(8),
               child: Container(

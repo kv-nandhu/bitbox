@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'dart:io';
 
+import 'package:bitebox/whishlist/addfav.dart';
 import 'package:bitebox/function/dbfun.dart';
 import 'package:bitebox/models/user_product.dart';
 import 'package:bitebox/user/rec_detailScreen.dart';
@@ -100,7 +101,24 @@ class _CatBreakfastState extends State<CatBreakfast> {
                                       )
                                     ],
                                   ),
-                                  trailing: Icon(Icons.favorite_border)),
+                                  trailing: FutureBuilder<Icon>(
+                                              future: getIcon(addproducts),
+                                              builder: (context, snapshot) {
+                                                if (snapshot.connectionState ==
+                                                    ConnectionState.done) {
+                                                  return IconButton(
+                                                    icon: snapshot.data!,
+                                                    onPressed: () {
+                                                      addfav_button(
+                                                          addproducts, context);
+                                                    },
+                                                  );
+                                                } else {
+                                                  // Return a loading indicator or a placeholder widget if needed
+                                                  return CircularProgressIndicator();
+                                                }
+                                              },
+                                            ),),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(11),

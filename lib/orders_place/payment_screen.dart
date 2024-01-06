@@ -5,9 +5,10 @@ import 'dart:io';
 import 'package:bitebox/function/addcart_button.dart';
 import 'package:bitebox/function/cartdbhelper.dart';
 import 'package:bitebox/models/cart_model.dart';
-import 'package:bitebox/orderspeges/order_model.dart';
-import 'package:bitebox/orderspeges/orderfunction.dart';
-import 'package:bitebox/user/confirmation.dart';
+import 'package:bitebox/orders_place/order_model.dart';
+import 'package:bitebox/orders_place/orderfunction.dart';
+
+import 'package:bitebox/orders_place/confirmation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -42,7 +43,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: Colors.redAccent.shade700,
         title: Text(
           'Confirm Order',
           style: TextStyle(color: Colors.black),
@@ -265,7 +266,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             id: data.id,
                                             productName: data.name!,
                                             productPrice: data.prize!,
-                                            productDetails: data.about!,
+                                            productabout: data.about!,
                                             productImage: data.image!,
                                             totalPrice: int.parse(
                                                 data.prize!), //ith mattanam
@@ -287,7 +288,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                 builder: (ctx) => CnfrmPage()),
                                             (route) => false);
                                       }
-                                    },
+                                    },style: ElevatedButton.styleFrom(
+                                      primary: Colors.black
+                                    ),
                                     child: Text('Place Order'));
                               }),
                         ),

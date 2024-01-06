@@ -10,7 +10,7 @@ class Oredrplace {
   @HiveField(2)
   String productPrice;
   @HiveField(3)
-  String productDetails;
+  String productabout;
   @HiveField(4)
   int productCount;
   @HiveField(5)
@@ -32,7 +32,7 @@ class Oredrplace {
       {required this.id,
       required this.productName,
       required this.productPrice,
-      required this.productDetails,
+      required this.productabout,
       required this.productImage,
       required this.totalPrice,
       required this.productCount,

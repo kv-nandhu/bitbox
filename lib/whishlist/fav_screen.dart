@@ -1,21 +1,19 @@
 // ignore: file_names
 import 'dart:io';
-import 'package:bitebox/function/addfav.dart';
+import 'package:bitebox/whishlist/addfav.dart';
 import 'package:bitebox/function/addproduct_functions.dart';
+import 'package:bitebox/function/dbfun.dart';
 import 'package:bitebox/models/user_favorite.dart';
-import 'package:bitebox/user/cart.dart';
+import 'package:bitebox/user/rec_detailScreen.dart';
 import 'package:flutter/material.dart';
 
+dbhelper help = dbhelper();
 class FavScreen extends StatefulWidget {
   const FavScreen({super.key});
-
   @override
   State<FavScreen> createState() => _FavScreenState();
 }
-
 class _FavScreenState extends State<FavScreen> {
-
-
   @override
   void initState() {
     super.initState();
@@ -28,15 +26,6 @@ class _FavScreenState extends State<FavScreen> {
         backgroundColor: Colors.redAccent.shade700,
         title: Text("Favorite"),
         centerTitle: true,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 10),
@@ -59,12 +48,14 @@ class _FavScreenState extends State<FavScreen> {
                         final addfav = addfvp[index];
                         return GestureDetector(
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => DetailScreen(products: addproducts,),
-                              // ),
-                            // );
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailScreen(
+                                    products: addfav,
+                                  ),
+                                ),
+                              );
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -127,7 +118,7 @@ class _FavScreenState extends State<FavScreen> {
                                               color: Colors.red,
                                             ),
                                             onPressed: () {
-                                             deletefav(addfav.id!);
+                                             removefav(context, addfav.id!);
                                              
                                             },
                                           ),
@@ -135,11 +126,10 @@ class _FavScreenState extends State<FavScreen> {
                                             icon: Icon(
                                                 Icons.shopping_cart_outlined),
                                             onPressed: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          CartScreen()));
+                                              // setState(() {
+                                              //     checkCart(
+                                              //         addfavl, context);
+                                              //   });
                                             },
                                           ),
                                         ],

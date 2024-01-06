@@ -1,3 +1,4 @@
+
 import 'package:bitebox/function/addproduct_functions.dart';
 import 'package:bitebox/models/user_favorite.dart';
 import 'package:bitebox/models/user_product.dart';
@@ -36,12 +37,50 @@ void addfav_button(Addproducts addproducts, BuildContext context) async {
       content: Text('Added to Favorite'),
       duration: Duration(seconds: 1),
       backgroundColor: Colors.green,
-    ));   
+    ));
   }
 }
 
-void deletefav(int id) async {
+void removefav(BuildContext context, int? id) {
+  showDialog(context: context, builder: (context) {
+    return AlertDialog(
+      title: Text('Remove Favorite'),
+      content: Text('Do you want remove'),
+      actions: [
+        ElevatedButton(onPressed: () {
+          deletefav(context, id!);
+        }, child: Text('yes')),
+        ElevatedButton(onPressed: () {
+          Navigator.pop(context);
+        }, child: Text('No'))
+      ],
+    );
+  });
+}
+
+void deletefav(context, int id) async {
   final remove = await Hive.openBox<Addfavorite>('add_fav');
   remove.delete(id);
   getfavorite();
+
+  Navigator.pop(context);
+}
+
+Future <Icon> getIcon(addproducts) async {
+  await Hive.openBox<Addfavorite>('add_fav');
+  final addfavBox = Hive.box<Addfavorite>('add_fav');
+  final favexists =
+      addfavBox.values.any((user) => user.name == addproducts.name);
+
+  if (favexists) {
+    return Icon(
+      Icons.favorite,
+      color: Colors.red,
+    );
+  } else {
+    return Icon(
+      Icons.favorite_border,
+      color: Colors.black,
+    );
+  }
 }

@@ -1,8 +1,6 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'dart:io';
-
-import 'package:bitebox/function/addproduct_functions.dart';
 import 'package:bitebox/function/dbfun.dart';
 import 'package:bitebox/models/user_product.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +25,7 @@ class _AddProductPageState extends State<AddProductPage> {
   File? imageSelect;
 
   List<String> categories = [
-    'Break fast',
+    'Break Fast',
     'Lunch',
     'Dinner',
     'Burger',

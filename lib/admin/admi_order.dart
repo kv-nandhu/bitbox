@@ -1,16 +1,16 @@
-// ignore: file_names
+
 import 'package:bitebox/user/order_detail.dart';
 import 'package:bitebox/user/order_cncl.dart';
 import 'package:flutter/material.dart';
 
-class OrderScreen extends StatefulWidget {
-  const OrderScreen({super.key});
+class OrderMain extends StatefulWidget {
+  const OrderMain({super.key});
 
   @override
-  State<OrderScreen> createState() => _OrderScreenState();
+  State<OrderMain> createState() => _OrderMainState();
 }
 
-class _OrderScreenState extends State<OrderScreen> {
+class _OrderMainState extends State<OrderMain> {
   icon() => null;
 
   @override

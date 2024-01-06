@@ -1,5 +1,6 @@
 import 'package:bitebox/user/home_screen.dart';
 import 'package:bitebox/user/main_home.dart';
+import 'package:bitebox/user/track.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,9 @@ class _CnfrmPageState extends State<CnfrmPage> {
               child: Container(
                 width: 240,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TrackScreen()));
+                  },
                   style: ElevatedButton.styleFrom(
                     // ignore: deprecated_member_use
                     primary: const Color.fromARGB(255, 0, 0, 0),

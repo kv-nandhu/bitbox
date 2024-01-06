@@ -1,41 +1,22 @@
-// ignore: file_names
+// ignore_for_file: must_be_immutable
 import 'dart:io';
-
 import 'package:bitebox/function/addcart_button.dart';
-import 'package:bitebox/user/address_screen.dart';
-import 'package:bitebox/user/payment_page.dart';
-import 'package:bitebox/user/cart.dart';
-import 'package:bitebox/orderspeges/payment_screen.dart';
+import 'package:bitebox/function/cartdbhelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:clippy_flutter/arc.dart';
-import '../models/user_product.dart';
 
 class DetailScreen extends StatefulWidget {
-  
-   DetailScreen({required this.products,super.key,});
-      Addproducts products;
+  DetailScreen({
+    required this.products,
+    super.key,
+  });
+  dynamic products;
   @override
   State<DetailScreen> createState() => _DetailScreenState();
 }
-
 class _DetailScreenState extends State<DetailScreen> {
-    int quantity = 1;
-
-  void incrementQuantity() {
-    setState(() {
-      quantity++;
-    });
-  }
-
-  void decrementQuantity() {
-    setState(() {
-      if (quantity > 1) {
-        quantity--;
-      }
-    });
-  }
-
+  carthHelper chelp = carthHelper();
   icon() => null;
 
   @override
@@ -47,22 +28,20 @@ class _DetailScreenState extends State<DetailScreen> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.only(top: 5),
+        padding: EdgeInsets.only(top: 5, bottom: 10),
         child: ListView(
           children: [
-            Container(
+            SizedBox(
               height: 280,
               child: Padding(
-                padding: EdgeInsets.all(7),
-                child:Image.file(File(widget.products.image!))
-              ),
+                  padding: EdgeInsets.all(7),
+                  child: Image.file(File(widget.products.image!))),
             ),
             Arc(
                 edge: Edge.TOP,
                 arcType: ArcType.CONVEY,
                 height: 50,
                 child: Container(
-                  
                   height: 400,
                   width: double.infinity,
                   color: Color.fromARGB(255, 213, 211, 211),
@@ -72,12 +51,26 @@ class _DetailScreenState extends State<DetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(top: 60, bottom: 10),
+                          padding: EdgeInsets.only(
+                            top: 60,
+                            bottom: 10,
+                          ),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children:  [
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Text(
-                                   '₹${widget.products.prize}',
+                                '${widget.products.name}',
+                                style: TextStyle(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                                 Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                // totalprice.toString(),
+                                '₹${widget.products.prize}',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -85,64 +78,6 @@ class _DetailScreenState extends State<DetailScreen> {
                               ),
                             ],
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: 10,
-                            bottom: 40,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                               '${widget.products.name}',
-                                style: TextStyle(
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              // SizedBox(
-                              //   width: 150,
-                              // ),
-                              Row(
-                                
-                                children: [
-                                  Container(
-                                    width: 120,
-                                    height: 40,
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                    
-                                        IconButton(onPressed: () {
-                                          setState(() {
-                                            decrementQuantity();
-                                          });
-                                        },
-                                        icon: Icon(CupertinoIcons.minus)),
-                                         Text(
-                                              quantity.toString(),
-                                              style: const TextStyle(
-                                               fontSize: 15, color: Colors.white),
-                                                 ),
-                                                 
-                                              IconButton(onPressed: () {
-                                          setState(() {
-                                         incrementQuantity();
-                                          });
-                                        },
-                                        icon: Icon(CupertinoIcons.plus)),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ),
@@ -150,12 +85,11 @@ class _DetailScreenState extends State<DetailScreen> {
                           padding: EdgeInsets.symmetric(
                             vertical: 10,
                           ),
-                          
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                                '${widget.products.about}',
-                                style: TextStyle(
+                              '${widget.products.about}',
+                              style: TextStyle(
                                 fontSize: 16,
                               ),
                               textAlign: TextAlign.justify,
@@ -208,21 +142,21 @@ class _DetailScreenState extends State<DetailScreen> {
               height: 20,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: EdgeInsets.all(10),
-                  child: Container(
-                    // height: 50,
-                    // width: 200,
+                  child: SizedBox(
+                    height: 50,
+                    width: 300,
                     child: ElevatedButton(
                       onPressed: () {
-                      setState(() {
-                        checkCart(widget.products, context);
-                      });
+                        setState(() {
+                          checkCart(widget.products, context);
+                        });
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.redAccent.shade700,
+                        backgroundColor: Colors.redAccent.shade700,
                       ),
                       child: Text(
                         'Add to Cart',
@@ -234,33 +168,8 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                 ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    // ignore: sized_box_for_whitespace
-                    child: Container(
-                      // height: 50,
-                      // width: 400,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ViewAddress(total: int.parse(widget.products.prize!),)));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          // ignore: deprecated_member_use
-                          primary: Colors.redAccent.shade700,
-                        ),
-                        child: Text(
-                          'Buy',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
               ],
             ),
-            
           ],
         ),
       ),

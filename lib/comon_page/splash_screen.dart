@@ -2,12 +2,12 @@
 
 import 'package:bitebox/main.dart';
 import 'package:bitebox/comon_page/first_screen.dart';
-import 'package:bitebox/user/home_screen.dart';
-import 'package:bitebox/comon_page/sign_screen.dart';
+import 'package:bitebox/user/main_home.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenSplash extends StatefulWidget {
+  
   const ScreenSplash({super.key});
 
   @override
@@ -18,7 +18,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
   @override
   void initState() {
     gotoLogin(context);
-
+    checkUserLoggin();
     super.initState();
   }
 
@@ -49,20 +49,20 @@ class _ScreenSplashState extends State<ScreenSplash> {
   Future<void> gotoLogin(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 3));
     // ignore: use_build_context_synchronously
-    Navigator.pushReplacement(
+    Navigator.push(
         context, MaterialPageRoute(builder: (ctx) => SigninLogin()));
   }
   
   Future<void> checkUserLoggin() async {
-    final _sharedprefs = await SharedPreferences.getInstance();
-    final _userLoggedin = _sharedprefs.getBool(SAVE_KEY);
-
+    final _sharedPrefs = await SharedPreferences.getInstance();
+    final _userLoggedin = _sharedPrefs.getBool("saveUserEmail");
+   print(_userLoggedin);
     if (_userLoggedin == null || _userLoggedin == false) {
       gotoLogin(context);
     } else {
       await Future.delayed(Duration(seconds: 2));
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (ctx) => HomeScreen()));
+          .pushReplacement(MaterialPageRoute(builder: (ctx) => HomesScreenPage()));
     }
   }
 }

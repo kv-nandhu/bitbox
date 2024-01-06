@@ -20,7 +20,7 @@ class OredrplaceAdapter extends TypeAdapter<Oredrplace> {
       id: fields[0] as int?,
       productName: fields[1] as String,
       productPrice: fields[2] as String,
-      productDetails: fields[3] as String,
+      productabout: fields[3] as String,
       productImage: fields[11] as String,
       totalPrice: fields[5] as int,
       productCount: fields[4] as int,
@@ -43,7 +43,7 @@ class OredrplaceAdapter extends TypeAdapter<Oredrplace> {
       ..writeByte(2)
       ..write(obj.productPrice)
       ..writeByte(3)
-      ..write(obj.productDetails)
+      ..write(obj.productabout)
       ..writeByte(4)
       ..write(obj.productCount)
       ..writeByte(5)

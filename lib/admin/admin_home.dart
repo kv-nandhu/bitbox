@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:bitebox/admin/admi_order.dart';
 import 'package:bitebox/admin/admin_product.dart';
 import 'package:bitebox/admin/product_list.dart';
 import 'package:bitebox/admin/userlist.dart';
@@ -120,7 +121,9 @@ class _AdminHomeState extends State<AdminHome> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => OrderMain()));
+                    },
                   ),
                 ),
                 SizedBox(
