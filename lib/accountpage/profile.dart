@@ -1,12 +1,12 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:bitebox/accountpage/edit_profile.dart';
 import 'package:bitebox/accountpage/more_info.dart';
 import 'package:bitebox/comon_page/first_screen.dart';
-import 'package:bitebox/dark_mode/theme_provider.dart';
 import 'package:bitebox/main.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:bitebox/user/track.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -16,7 +16,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   
-     var val = false;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent.shade700,
@@ -122,7 +121,7 @@ class ProfileScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(18)),
                 child: ListTile(
                   onTap: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AboutScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AboutScreen()));
                   },
                   leading: Icon(
                     Icons.more_horiz_sharp,
@@ -140,7 +139,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // Padding(
+            //  Padding(
             //   padding: const EdgeInsets.all(8),
             //   child: Container(
             //     decoration: BoxDecoration(
@@ -149,30 +148,26 @@ class ProfileScreen extends StatelessWidget {
             //         ),
             //         borderRadius: BorderRadius.circular(18)),
             //     child: ListTile(
-            //       onTap: () {},
+            //       onTap: () {
+            //         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TrackScreen()));
+            //       },
             //       leading: Icon(
-            //         Icons.dark_mode,
+            //         Icons.more_horiz_sharp,
             //         color: Colors.black,
             //       ),
-            //       trailing: Transform.scale(
-            //     scale: 0.8,
-            //     child: CupertinoSwitch(
-            //       activeColor:  Colors.tealAccent.shade400,
-            //       value: themeChange.darkTheme,
-            //       onChanged: (bool value) => 
-            //       themeChange.darkTheme =value
-                  
-            //     ),
-            //   ),
+            //       trailing: Icon(
+            //         Icons.arrow_forward_ios,
+            //         color: Colors.black,
+            //       ),
             //       title: Text(
-            //         'Dark Mode',
+            //         'Track order',
             //         style:
             //             GoogleFonts.poppins(color: Colors.black, fontSize: 17),
-                         
             //       ),
             //     ),
             //   ),
             // ),
+       
             Padding(
               padding: const EdgeInsets.all(8),
               child: Container(
@@ -224,9 +219,9 @@ class ProfileScreen extends StatelessWidget {
   }
   
   void Logouting(BuildContext ctx)async{
-   Navigator.push(ctx, MaterialPageRoute(builder: (ctx)=>SigninLogin()));
- final _shared =await SharedPreferences.getInstance();
- _shared.setBool(SAVE_KEY, false);
+   Navigator.pushReplacement(ctx, MaterialPageRoute(builder: (ctx)=>SigninLogin()));
+ final shared =await SharedPreferences.getInstance();
+ shared.setBool(SAVE_KEY, false);
   }
   
 

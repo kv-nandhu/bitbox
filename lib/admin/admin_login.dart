@@ -80,8 +80,7 @@ class AdminLogin extends StatelessWidget {
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey,
-                        onPrimary: Colors.black,
+                        foregroundColor: Colors.black, backgroundColor: Colors.grey,
                       ),
                       onPressed: () {
                         checkLogin(context);
@@ -99,8 +98,8 @@ class AdminLogin extends StatelessWidget {
 
   void checkLogin(BuildContext ctx) async {
     // ignore: unused_local_variable
-    final _shared = await SharedPreferences.getInstance();
-    await _shared.setBool(SAVE_KEY, true);
+    final shared = await SharedPreferences.getInstance();
+    await shared.setBool(SAVE_KEY, true);
     final username = _usernameController.text;
     final password = _passwordController.text;
     if (username == 'nandhu' && password == '1234') {

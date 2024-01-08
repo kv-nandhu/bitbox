@@ -1,5 +1,5 @@
+
 import 'package:bitebox/accountpage/profile.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,6 +16,7 @@ class _AboutScreenState extends State<AboutScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+            
           centerTitle: true,
           elevation: 0,
           title: Text(
@@ -32,7 +33,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 Icons.arrow_back_sharp,
                 color: Colors.black,
               )),
-          backgroundColor: Colors.white,
+           backgroundColor: Colors.redAccent.shade700,
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -57,10 +58,31 @@ class _AboutScreenState extends State<AboutScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '₿ITE ₿OX',
-                          style: TextStyle(fontSize: 40, color: Colors.black),
+                        Text.rich(
+                          TextSpan(
+                            text: '₿ITE',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 4, 142, 221),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 40,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: ' ₿OX',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 40,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+
+                        // Text(
+                        //   '₿ITE ₿OX',
+                        //   style: TextStyle(fontSize: 40, color: Colors.black),
+                        // ),
                         Text(
                           'F O O D    D E L I V E R Y',
                           style: TextStyle(
@@ -78,21 +100,41 @@ class _AboutScreenState extends State<AboutScreen> {
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(11.0),
                 child: Column(
                   children: [
                     Title(
                         color: Color.fromARGB(255, 0, 0, 0),
                         child: Text(
-                          'Your Ultimate Gadget Shoping Experience',
-                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                          'Your Ultimate Food Delivery Experience',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w600),
                         )),
-                          SizedBox(
-                          height: 15,
-                          ),
-                
-                    Text('Welcome to "Bite Box" your go to destinition for a seamless and delighful gadget shoping experience. "Bite Box" is a cutting-edge flutter application of e-comerce with the efficiecy of a local Hive database. Discover the latest and trendiest gadgets, shop with confidence and enjoy personalized journy tailored to your preference ')
-                ],
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      '''"Bite Box" is a Flutter-based mobile application designed to streamline the food delivery experience, similar to popular platforms like Swiggy. The key feature that sets Bite Box apart is its reliance on a local database, specifically Hive, to manage and store food-related data. This ensures efficient data retrieval and storage, contributing to a seamless user experience''',
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Title(
+                        color: Colors.black,
+                        child: Text('Extensive Key Features',style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w600),)),
+                         SizedBox(
+                      height: 15,
+                    ),
+                    Text('''Bite Box utilizes Hive, a lightweight and efficient NoSQL database for Flutter, to manage and store various aspects of the application's data. This includes information about food items, categories, and user preferences. The local database enhances speed and responsiveness.
+Users can explore a diverse range of food items categorized based on different criteria such as cuisine, dietary preferences, and popularity. The application provides an intuitive interface for users to browse through available options.
+Category-Based Organization: Bite Box categorizes food items to simplify the browsing process. Users can easily navigate through categories like Breakfast, Lunch, Dinner, Snacks, Desserts, etc. This organized approach enhances user experience and helps users quickly find what they are looking for.
+User-Friendly Interface: The application boasts a user-friendly interface, ensuring a smooth and enjoyable user experience. Intuitive navigation, visually appealing design, and interactive elements contribute to the overall usability of the application.
+Bite Box allows users to place food orders directly through the app. Users can select their desired items, customize orders, and proceed with secure and convenient online payment options.
+ ''')
+                  ],
                 ),
               ),
             ],

@@ -52,8 +52,7 @@ class _SigninLoginState extends State<SigninLogin> {
                     ),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.grey,
-                          onPrimary: Colors.black,
+                          foregroundColor: Colors.black, backgroundColor: Colors.grey,
                         ),
                         onPressed: () {
                           Navigator.pushReplacement(

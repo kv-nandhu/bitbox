@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:bitebox/main.dart';
 import 'package:bitebox/comon_page/first_screen.dart';
 import 'package:bitebox/user/main_home.dart';
 import 'package:flutter/material.dart';
@@ -54,13 +53,14 @@ class _ScreenSplashState extends State<ScreenSplash> {
   }
   
   Future<void> checkUserLoggin() async {
-    final _sharedPrefs = await SharedPreferences.getInstance();
-    final _userLoggedin = _sharedPrefs.getBool("saveUserEmail");
-   print(_userLoggedin);
-    if (_userLoggedin == null || _userLoggedin == false) {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final userLoggedin = sharedPrefs.getBool("saveUserEmail");
+    if (userLoggedin == null || userLoggedin == false) {
+      // ignore: use_build_context_synchronously
       gotoLogin(context);
     } else {
       await Future.delayed(Duration(seconds: 2));
+      // ignore: use_build_context_synchronously
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (ctx) => HomesScreenPage()));
     }

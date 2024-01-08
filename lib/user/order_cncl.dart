@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 cancelHelper cncl = cancelHelper();
+
 class CancelDetails extends StatefulWidget {
   const CancelDetails({super.key});
 
@@ -72,55 +73,55 @@ class _CancelDetailsState extends State<CancelDetails> {
                                   width: 9,
                                 ),
                                 Column(
+                                   
                                   children: [
-                                    Text(
-                                      cancelitem.name,
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 16,
+                                    Row(
+                                      
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          cancelitem.name,
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                         SizedBox(width: 70,),
+                                         Text(
+                                      '₹${cancelitem.price}',
+                                      style: GoogleFonts.rubik(
+                                          fontSize: 14,
                                           fontWeight: FontWeight.w500),
+                                    ),
+                                      ],
                                     ),
                                     SizedBox(
                                       height: 24,
                                     ),
-                                    Text(
-                                       'Qty : ${cancelitem.productCount.toString()}',
-                                      style: GoogleFonts.rubik(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                    // SizedBox(
-                                    //   height: 15,
-                                    // ),
-                                    // Text(
-                                    //   qty[index],
-                                    // )
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 42,
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
+                                    Row(
+                                     
+                                      children: [
+                                        Text(
+                                          'Qty : ${cancelitem.productCount.toString()}',
+                                          style: GoogleFonts.rubik(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        SizedBox(width: 60,),
+                                           Text(
                                       'OrderCanceld',
                                       style: GoogleFonts.rubik(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.red),
                                     ),
-                                    SizedBox(
-                                      height: 30,
+                                      ],
                                     ),
-                                    Text(
-                                      '₹${cancelitem.price}',
-                                      style: GoogleFonts.rubik(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
-                                    )
                                   ],
-                                )
+                                ),
                               ],
                             ),
+                           
                           ],
                         ),
                       );

@@ -212,13 +212,13 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
           address.isNotEmpty &&
           city.isNotEmpty &&
           pincode.isNotEmpty) {
-        final _addAddress = Address(
+        final addAddress = Address(
             usrname: username,
             number: number,
             address: address,
             city: city,
             pincode: pincode, id: -1);
-        addtoaddress(_addAddress);
+        addtoaddress(addAddress);
         Navigator.pop(context);
         showDailogealert(context);
       } else {

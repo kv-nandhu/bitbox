@@ -1,14 +1,12 @@
 import 'dart:io';
-import 'package:bitebox/function/addproduct_functions.dart';
 import 'package:bitebox/function/dbfun.dart';
 import 'package:bitebox/models/user_product.dart';
-import 'package:bitebox/comon_page/sign_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProductEditing extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final product;
   final int id;
   final int index;
@@ -20,6 +18,7 @@ class ProductEditing extends StatefulWidget {
       required this.id});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProductEditingState createState() => _ProductEditingState();
 }
 

@@ -1,4 +1,5 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: file_names
+
 import 'dart:io';
 import 'package:bitebox/function/addcart_button.dart';
 import 'package:bitebox/function/cartdbhelper.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:clippy_flutter/arc.dart';
 
+// ignore: must_be_immutable
 class DetailScreen extends StatefulWidget {
   DetailScreen({
     required this.products,

@@ -66,8 +66,25 @@ void deletefav(context, int id) async {
   Navigator.pop(context);
 }
 
-Future <Icon> getIcon(addproducts) async {
-  await Hive.openBox<Addfavorite>('add_fav');
+// Future <Icon> getIcon(addproducts) async {
+//   await Hive.openBox<Addfavorite>('add_fav');
+//   final addfavBox = Hive.box<Addfavorite>('add_fav');
+//   final favexists =
+//       addfavBox.values.any((user) => user.name == addproducts.name);
+
+//   if (favexists) {
+//     return Icon(
+//       Icons.favorite,
+//       color: Colors.red,
+//     );
+//   } else {
+//     return Icon(
+//       Icons.favorite_border,
+//       color: Colors.black,
+//     );
+//   }
+// }
+Icon getIcon(addproducts) {
   final addfavBox = Hive.box<Addfavorite>('add_fav');
   final favexists =
       addfavBox.values.any((user) => user.name == addproducts.name);

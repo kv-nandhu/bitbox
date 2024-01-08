@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 
 ValueNotifier<List<Cart>> addcartlist = ValueNotifier([]);
 
+// ignore: camel_case_types
 class carthHelper {
   Future<void> delete(
     int id,

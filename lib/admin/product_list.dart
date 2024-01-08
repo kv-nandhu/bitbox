@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:bitebox/admin/admin_product.dart';
 import 'package:bitebox/admin/product_editing.dart';
 import 'package:bitebox/costum.dart';
-import 'package:bitebox/function/addproduct_functions.dart';
 import 'package:bitebox/function/dbfun.dart';
 import 'package:bitebox/models/user_product.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ class ProductListing extends StatefulWidget {
   const ProductListing({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ProductListingState createState() => _ProductListingState();
 }
 
@@ -86,7 +86,7 @@ class _ProductListingState extends State<ProductListing> {
                           );
                         })
                   ]),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: 180,
                     child: Stack(
@@ -96,17 +96,17 @@ class _ProductListingState extends State<ProductListing> {
                           top: 0,
                           child: Container(
                             width: 149,
-                            height: 201,
-                         
-                            child: imagePath != null
-                                ? Image.file(File(
-                                    imagePath)) 
-                                : Placeholder(), 
+                            height: 201, 
                             decoration: ShapeDecoration(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
                             ),
+                         
+                            child: imagePath != null
+                                ? Image.file(File(
+                                    imagePath)) 
+                                : Placeholder(),
                           ),
                         ),
                         Positioned(

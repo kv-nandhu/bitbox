@@ -23,15 +23,13 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
- 
   late Box<Cart> cartBox = Hive.box<Cart>('cart');
   int total = 0;
 
   @override
   void initState() {
     super.initState();
-  chelp.getall();
-   
+    chelp.getall();
   }
 
   @override
@@ -39,7 +37,8 @@ class _CartScreenState extends State<CartScreen> {
     super.didUpdateWidget(oldWidget);
   }
 
-  Widget build(BuildContext context) { Future.delayed(Duration(microseconds: 1), () {
+  Widget build(BuildContext context) {
+    Future.delayed(Duration(microseconds: 1), () {
       setState(() {});
     });
     total = 0;
@@ -50,298 +49,313 @@ class _CartScreenState extends State<CartScreen> {
           iconTheme: IconThemeData(color: Colors.black),
           elevation: 0,
           centerTitle: true,
-          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          backgroundColor: Colors.redAccent.shade700,
           title: Text(
             "Cart",
             style: GoogleFonts.rubik(
                 color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                height: 400,
-                child: ValueListenableBuilder(
-                    valueListenable: addcartlist,
-                    builder:
-                        (context, List<Cart> addcartlist, Widget? child) {
-                      return ListView.builder(
-                          itemCount: addcartlist.isEmpty ? 1 :  addcartlist.length,
-                          itemBuilder: (BuildContext context, int index) {
-                               if (addcartlist.isEmpty) {
-                      return Column(
-                        children: [
-                          Center(
-                              child: Container(
-                            width: double.infinity,
-                            height: 550,
-                          
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+        body: cartBox.isEmpty
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'images/cartempty.jpg',
+                    height: 350,
+                  ),
+                  Text(
+                    "Your Cart is Currently Empty❗",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  )
+                ],
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 400,
+                      child: ValueListenableBuilder(
+                          valueListenable: addcartlist,
+                          builder:
+                              (context, List<Cart> addcartlist, Widget? child) {
+                            return ListView.builder(
+                                itemCount: addcartlist.isEmpty
+                                    ? 1
+                                    : addcartlist.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final cart =
+                                      addcartlist.reversed.toList()[index];
+
+                                  int price = int.parse(cart.prize!);
+                                  int? quantity = cart.count;
+                                  int totalPrice = price * quantity!;
+
+                                  total += totalPrice + 50;
+
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Slidable(
+                                      startActionPane: ActionPane(
+                                          motion: StretchMotion(),
+                                          children: [
+                                            SlidableAction(
+                                              label: 'Remove',
+                                              onPressed: (context) {
+                                                setState(() {
+                                                  // delete_cart(cart.id);
+                                                  removecart(context, cart.id);
+                                                });
+                                              },
+                                              icon: Icons.delete,
+                                              autoClose: true,
+                                              backgroundColor: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            )
+                                          ]),
+                                      child: Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: Container(
+                                                width: 90,
+                                                height: 108,
+                                                child: Image.file(
+                                                  File(cart.image!),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Text(
+                                                  cart.name!,
+                                                  style: GoogleFonts.rubik(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Text('₹${cart.prize!}'),
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10, right: 10),
+                                              child: Container(
+                                                height: 124,
+                                                decoration: BoxDecoration(
+                                                    color: Color.fromARGB(
+                                                        255, 67, 130, 178),
+                                                    border: Border.all(
+                                                        color: Colors.black),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                child: Column(
+                                                  children: [
+                                                    IconButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          //add(cart.count);
+                                                          // cart.count++;
+                                                          if (cart.count! < 9) {
+                                                            cart.count =
+                                                                (cart.count! +
+                                                                        1)
+                                                                    .clamp(
+                                                                        0, 9);
+                                                          } else {
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                                    SnackBar(
+                                                              content: Text(
+                                                                  'Max Limit'),
+                                                              duration:
+                                                                  Duration(
+                                                                      seconds:
+                                                                          2),
+                                                              backgroundColor:
+                                                                  Colors.red,
+                                                            ));
+                                                          }
+                                                        });
+                                                      },
+                                                      icon: Icon(
+                                                        CupertinoIcons.add,
+                                                      ),
+                                                      iconSize: 20,
+                                                    ),
+                                                    Text('${cart.count}'),
+                                                    IconButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          if (cart.count! > 1) {
+                                                            cart.count =
+                                                                (cart.count! -
+                                                                        1)
+                                                                    .clamp(
+                                                                        0, 9);
+                                                          }
+                                                        });
+                                                      },
+                                                      icon: Icon(
+                                                          CupertinoIcons.minus),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        width: double.infinity,
+                                        height: 120,
+                                        decoration: BoxDecoration(
+                                            border:
+                                                Border.all(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                      ),
+                                    ),
+                                  );
+                                });
+                          }),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      child: ValueListenableBuilder<Box<Cart>>(
+                          valueListenable: cartBox.listenable(),
+                          builder: (context, cartBox, _) {
+                            return Column(
                               children: [
-                                Image.asset(
-                                  'images/cartempty.jpg',
-                                  // fit: BoxFit.cover,
-                                  height: 350,
-                                  // width: 500,
-                                ),
-                                Text("Your Cart is Currently Empty❗",style: TextStyle(fontWeight: FontWeight.bold),)
-                              ],
-                            ),
-                          )),
-                        ],
-                      );
-                    }
-                            final cart = addcartlist.reversed.toList()[index];
-
-                            int price = int.parse(cart.prize!);
-                            int? quantity = cart.count;
-                            int totalPrice = price * quantity!;
-
-                            total += totalPrice;
-
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10, right: 10, left: 10),
-                              child: Slidable(
-                                startActionPane: ActionPane(
-                                    motion: StretchMotion(),
-                                    children: [
-                                      SlidableAction(
-                                        label: 'Remove',
-                                        onPressed: (context) {
-                                          setState(() {
-                                            // delete_cart(cart.id);
-                                            removecart(context, cart.id);
-                                          });
-                                        },
-                                        icon: Icons.delete,
-                                        autoClose: true,
-                                        backgroundColor: Colors.red,
-                                        borderRadius: BorderRadius.circular(20),
-                                      )
-                                    ]),
-                                child: Container(
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        child: Container(
-                                          width: 90,
-                                          height: 108,
-                                          child: Image.file(
-                                            File(cart.image!),
-                                            fit: BoxFit.cover,
-                                          ),
+                                      Text(
+                                        "Sub-Total",
+                                        style: TextStyle(
+                                          fontSize: 20,
                                         ),
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            cart.name!,
-                                            style: GoogleFonts.rubik(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text('₹${cart.prize!}'),
-                                   
-                                        ],
+                                      Text(
+                                        '₹${total.toString()}',
+                                        style: TextStyle(fontSize: 20),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        child: Container(
-                                          height: 124,
-                                          decoration: BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  255, 67, 130, 178),
-                                              border: Border.all(
-                                                  color: Colors.black),
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: Column(
-                                            children: [
-                                              IconButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    //add(cart.count);
-                                                    // cart.count++;
-                                                    if (cart.count !< 9) {
-                                                      cart.count = (cart.count! + 1).clamp(0, 9);
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                        content:
-                                                            Text('Max Limit'),
-                                                        duration: Duration(
-                                                            seconds: 2),
-                                                        backgroundColor:
-                                                            Colors.red,
-                                                      ));
-                                                    }
-                                                  });
-                                                },
-                                                icon: Icon(
-                                                  CupertinoIcons.add,
-                                                ),
-                                                iconSize: 20,
-                                              ),
-                                              Text('${cart.count}'),
-                                              IconButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    if (cart.count !> 1) {
-                                                      cart.count = (cart.count! - 1).clamp(0, 9);
-                                                    }
-                                                  });
-                                                },
-                                                icon:
-                                                    Icon(CupertinoIcons.minus),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )
                                     ],
                                   ),
-                                  width: double.infinity,
-                                  height: 120,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
-                                      borderRadius: BorderRadius.circular(20)),
                                 ),
-                              ),
+                                Divider(
+                                  color: Colors.black,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Delivery",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        "₹50",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(
+                                  color: Colors.black,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Total",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        "₹${total + 50}", // Assuming total is the correct variable
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.red),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             );
-                          });
-                    }),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                child: ValueListenableBuilder<Box<Cart>>(
-                    valueListenable: cartBox.listenable(),
-                    builder: (context, cartBox, _) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Sub-Total",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Text(
-                                  '₹${total.toString()}',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: Colors.black,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Delivery",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Text(
-                                  "₹50",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: Colors.black,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Total",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Text(
-                                  "₹${total + 50}", // Assuming total is the correct variable
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.red),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                // ignore: sized_box_for_whitespace
-                child: Container(
-                  height: 50,
-                  width: 400,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (cartBox.isNotEmpty) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (ctx) => ViewAddress(
-                                                  total: total,
-                                                )));
-                                  } else {
-                                    Navigator.pop(context);
-                                    showDailogealert(context);
-                                  }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      // ignore: deprecated_member_use
-                      primary: Colors.redAccent.shade700,
+                          }),
                     ),
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                      // ignore: sized_box_for_whitespace
+                      child: Container(
+                        height: 50,
+                        width: 400,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (cartBox.isNotEmpty) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (ctx) => ViewAddress(
+                                            total: total,
+                                          )));
+                            } else {
+                              Navigator.pop(context);
+                              showDailogealert(context);
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            // ignore: deprecated_member_use
+                            primary: Colors.redAccent.shade700,
+                          ),
+                          child: Text(
+                            'Continue',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ));
+              ));
   }
+
   void showDailogealert(BuildContext context) {
     showDialog(
       context: context,

@@ -158,6 +158,7 @@ class _AdminHomeState extends State<AdminHome> {
       ),
     );
   }
+    // ignore: non_constant_identifier_names
     void AdminLogout(BuildContext context){
     showDialog(context: context, builder: (context){
       return AlertDialog(
@@ -174,9 +175,10 @@ class _AdminHomeState extends State<AdminHome> {
       ]);
     });
   }
+    // ignore: non_constant_identifier_names
     void Logouting(BuildContext ctx)async{
    Navigator.push(ctx, MaterialPageRoute(builder: (ctx)=>SigninLogin()));
- final _shared =await SharedPreferences.getInstance();
- _shared.setBool(SAVE_KEY, false);
+ final shared =await SharedPreferences.getInstance();
+ shared.setBool(SAVE_KEY, false);
   }
 }

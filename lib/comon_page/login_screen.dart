@@ -143,11 +143,13 @@ class LoginScreen extends StatelessWidget {
       }
     }
     if (user != null) {
-      final _sharedPrefs = await SharedPreferences.getInstance();
-      _sharedPrefs.setBool("saveUserEmail", true);
+      final sharedPrefs = await SharedPreferences.getInstance();
+      sharedPrefs.setBool("saveUserEmail", true);
       // ignore: use_build_context_synchronously
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomesScreenPage()));
+      // Navigator.pushReplacement(
+      //     context, MaterialPageRoute(builder: (context) => HomesScreenPage()));
+      // ignore: use_build_context_synchronously
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (home)=>HomesScreenPage()), (route) => false);
     } else {
       // ignore: use_build_context_synchronously
       showDialog(

@@ -1,7 +1,5 @@
-import 'package:bitebox/user/home_screen.dart';
 import 'package:bitebox/user/main_home.dart';
 import 'package:bitebox/user/track.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CnfrmPage extends StatefulWidget {
@@ -24,7 +22,7 @@ class _CnfrmPageState extends State<CnfrmPage> {
           children: [
             Padding(
               padding: EdgeInsets.all(10),
-              child: Container(
+              child: SizedBox(
                 height: 350,
                 child: Image(image: AssetImage('images/cnfrm.png')),
               ),
@@ -46,32 +44,32 @@ class _CnfrmPageState extends State<CnfrmPage> {
             SizedBox(
               height: 30,
             ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              // ignore: sized_box_for_whitespace
-              child: Container(
-                width: 240,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TrackScreen()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    // ignore: deprecated_member_use
-                    primary: const Color.fromARGB(255, 0, 0, 0),
-                  ),
-                  child: Text(
-                    'Track Order',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.all(10),
+            //   // ignore: sized_box_for_whitespace
+            //   child: Container(
+            //     width: 240,
+            //     child: ElevatedButton(
+            //       onPressed: () {
+            //         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TrackScreen()));
+            //       },
+            //       style: ElevatedButton.styleFrom(
+            //         // ignore: deprecated_member_use
+            //         primary: const Color.fromARGB(255, 0, 0, 0),
+            //       ),
+            //       child: Text(
+            //         'Track Order',
+            //         style: TextStyle(
+            //           fontSize: 18,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Container(
+              child: SizedBox(
                 width: 240,
                 child: ElevatedButton(
                     onPressed: () {
@@ -81,7 +79,7 @@ class _CnfrmPageState extends State<CnfrmPage> {
                               builder: (context) => HomesScreenPage()));
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 255, 255, 255),
+                        backgroundColor: Color.fromARGB(255, 255, 255, 255),
                         side: const BorderSide(
                           width: 2.0,
                           color: Colors.red,

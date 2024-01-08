@@ -198,8 +198,7 @@ class _AddProductPageState extends State<AddProductPage> {
                 ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey,
-                      onPrimary: Colors.black,
+                      foregroundColor: Colors.black, backgroundColor: Colors.grey,
                     ),
                     onPressed: () {
                       addButton();
@@ -262,32 +261,32 @@ class _AddProductPageState extends State<AddProductPage> {
   //button--------------------------------------------------
 
   Future<void> addButton() async {
-    final _name = _productnameController.text.trim();
-    final _prize = _productprizeController.text.trim();
-    final _unit = _productunitController.text.trim();
-    final _about = _productaboutController.text.trim();
-    final _category = _productCategory.toString();
+    final name = _productnameController.text.trim();
+    final prize = _productprizeController.text.trim();
+    final unit = _productunitController.text.trim();
+    final about = _productaboutController.text.trim();
+    final category = _productCategory.toString();
 
     if (imageSelect == null) {
       return;
     }
 
     if (_formKey.currentState!.validate() &&
-        _name.isNotEmpty &&
-        _prize.isNotEmpty &&
-        _unit.isNotEmpty &&
-        _about.isNotEmpty &&
-        _category.isNotEmpty) {
-      final _add = Addproducts(
+        name.isNotEmpty &&
+        prize.isNotEmpty &&
+        unit.isNotEmpty &&
+        about.isNotEmpty &&
+        category.isNotEmpty) {
+      final add = Addproducts(
         id: -1,
-        name: _name,
-        prize: _prize,
-        unit: _unit,
-        about: _about,
-        category: _category,
+        name: name,
+        prize: prize,
+        unit: unit,
+        about: about,
+        category: category,
         image: imageSelect!.path.toString(),
       );
-      help.save(_add);
+      help.save(add);
       showSnackBar(context, 'Added Succesfully!');
 
       _productnameController.clear();

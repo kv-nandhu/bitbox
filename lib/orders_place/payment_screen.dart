@@ -5,15 +5,16 @@ import 'dart:io';
 import 'package:bitebox/function/addcart_button.dart';
 import 'package:bitebox/function/cartdbhelper.dart';
 import 'package:bitebox/models/cart_model.dart';
-import 'package:bitebox/orders_place/order_model.dart';
-import 'package:bitebox/orders_place/orderfunction.dart';
 
 import 'package:bitebox/orders_place/confirmation.dart';
+import 'package:bitebox/orders_place/order_model.dart';
+import 'package:bitebox/orders_place/orderfunction.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 carthHelper chelp = carthHelper();
+
 class PaymentScreen extends StatefulWidget {
   final dynamic address;
   final int total;
@@ -23,6 +24,7 @@ class PaymentScreen extends StatefulWidget {
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
 }
+
 class _PaymentScreenState extends State<PaymentScreen> {
   int total = 0;
   @override
@@ -43,7 +45,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
-          backgroundColor: Colors.redAccent.shade700,
+        backgroundColor: Colors.redAccent.shade700,
         title: Text(
           'Confirm Order',
           style: TextStyle(color: Colors.black),
@@ -161,7 +163,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     SizedBox(
                                       width: 1,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: 92,
                                       height: 100,
                                       child: Image.file(
@@ -224,7 +226,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           borderRadius: BorderRadius.circular(20)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Icon(Icons.info_outline_rounded),
                           SizedBox(
                             width: 10,
@@ -289,14 +291,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                             (route) => false);
                                       }
                                     },style: ElevatedButton.styleFrom(
-                                      primary: Colors.black
+                                      backgroundColor: Colors.black
                                     ),
                                     child: Text('Place Order'));
                               }),
                         ),
                         SizedBox(
                           width: 1,
-                        )
+                        ),
                       ],
                     ),
                   ),

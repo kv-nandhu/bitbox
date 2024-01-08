@@ -1,6 +1,5 @@
 import 'package:bitebox/orders_place/order_model.dart';
 import 'package:bitebox/orders_place/orderfunction.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 

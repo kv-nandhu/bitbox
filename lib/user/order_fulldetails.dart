@@ -82,43 +82,63 @@ class _DetailsOrderState extends State<DetailsOrder> {
                     border: Border(
                   bottom: BorderSide(),
                 )),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                child: Column(
                   children: [
-                    Column(
+                    Row(
                       children: [
                         Image.file(
                           File(widget.image),
                           height: 70,
                           fit: BoxFit.contain,
                         ),
+                         Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                           children: [
+                             Text(
+                              widget.name,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 17),
+                        ),
+                           SizedBox(
+                          height: 18,
+                        ),
+                          Text(
+                          "₹${widget.total}",
+                          style: TextStyle(color: Colors.green, fontSize: 16),
+                        ),
+                           ],
+                         ),
+                     
+                      
                         SizedBox(
                           height: 20,
-                        )
+                        ),
                       ],
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  
                       children: [
-                        Text(
-                          widget.name,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 17),
-                        ),
+                        // Text(
+                        //   widget.name,
+                        //   style: TextStyle(
+                        //       fontWeight: FontWeight.w600, fontSize: 17),
+                        // ),
+                        // SizedBox(
+                        //   height: 18,
+                        // ),
+                        // Text(
+                        //   "₹${widget.total}",
+                        //   style: TextStyle(color: Colors.green, fontSize: 16),
+                        // ),
                         SizedBox(
                           height: 18,
                         ),
-                        Text(
-                          "₹${widget.total}",
-                          style: TextStyle(color: Colors.green, fontSize: 16),
-                        ),
-                        SizedBox(
-                          height: 18,
-                        ),
-                        Text(widget.details),
+                        Align(alignment: Alignment.bottomLeft,
+                          child: Text(widget.details)),
                         SizedBox(
                           height: 20,
                         )
@@ -159,7 +179,7 @@ class _DetailsOrderState extends State<DetailsOrder> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          "FREE",
+                          "₹50",
                           style: TextStyle(color: Colors.green),
                         ),
                         SizedBox(

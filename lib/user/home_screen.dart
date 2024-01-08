@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchcontrol = TextEditingController();
   late Box<Addproducts> productBox = Hive.box<Addproducts>(dbname);
-   late Box<Cart> cartBox = Hive.box<Cart>('cart');
+  late Box<Cart> cartBox = Hive.box<Cart>('cart');
 
   @override
   void initState() {
@@ -57,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Future.delayed(Duration(microseconds: 1), () {
       setState(() {});
     });
-    //  final themeChange =Provider.of<DarkThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         shape: RoundedRectangleBorder(
@@ -66,43 +65,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     MediaQuery.of(context).size.width, 70.0))),
         backgroundColor: Colors.redAccent.shade700,
         actions: [
-          // GestureDetector(
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => CartScreen()),
-          //     );
-          //   },
-             Stack(
-               children: [
-                           IconButton(onPressed: () {
-                setState(() {
-                     Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CartScreen()),
-                );
-                });
-                           }, icon: Icon(Icons.shop_2_outlined),
-                           ),
-                           Positioned(
-                            top: 8.0,
-                            right: 8.0,
-                            child: Container(
-                            padding: EdgeInsets.all(4.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.red,
-                            ),
-                            child: Text(
-                              '${cartBox.length}',
-                              style: TextStyle(
-                                color: Colors.white,fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                           ))
-                         ],
-             ),
-          
+          Stack(
+            children: [
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CartScreen()),
+                    );
+                  });
+                },
+                icon: Icon(Icons.shop_2_outlined),
+              ),
+              Positioned(
+                  top: 8.0,
+                  right: 8.0,
+                  child: Container(
+                    padding: EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.red,
+                    ),
+                    child: Text(
+                      '${cartBox.length}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ))
+            ],
+          ),
           Padding(
             padding: EdgeInsets.only(left: 10, right: 15),
             child: CircleAvatar(
@@ -121,9 +115,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    Text(
-                      '₿ITE ₿OX',
-                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    Text.rich(
+                      TextSpan(
+                        text: '₿ITE',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 4, 142, 221),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: ' ₿OX',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Text(
                       'F O O D    D E L I V E R Y',
@@ -253,7 +263,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 20,
                   ),
                   ValueListenableBuilder(
-                    
                     valueListenable: productlist,
                     builder:
                         (context, List<Addproducts> addlist, Widget? child) {
@@ -280,87 +289,81 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               );
                             },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16.0),
-                                color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                              child: Column(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(16.0),
-                                      topRight: Radius.circular(16.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16.0),
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                ),
+                                child: Column(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(16.0),
+                                        topRight: Radius.circular(16.0),
+                                      ),
+                                      child: Image.file(
+                                        File(addproducts.image!),
+                                        height: 170,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    child: Image.file(
-                                      File(addproducts.image!),
-                                      height: 170,
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          addproducts.name!,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium!
-                                              .merge(
-                                                const TextStyle(
-                                                  fontWeight: FontWeight.w700,
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            addproducts.name!,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .merge(
+                                                  const TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
                                                 ),
+                                          ),
+                                          const SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          Text('₹${addproducts.prize}'),
+                                          const SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              IconButton(
+                                                icon: getIcon(addproducts),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    addfav_button(
+                                                        addproducts, context);
+                                                  });
+                                                },
                                               ),
-                                        ),
-                                        const SizedBox(
-                                          height: 8.0,
-                                        ),
-                                        Text('₹${addproducts.prize}'),
-                                        const SizedBox(
-                                          height: 8.0,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            FutureBuilder<Icon>(
-                                              future: getIcon(addproducts),
-                                              builder: (context, snapshot) {
-                                                if (snapshot.connectionState ==
-                                                    ConnectionState.done) {
-                                                  return IconButton(
-                                                    icon: snapshot.data!,
-                                                    onPressed: () {
-                                                      addfav_button(
-                                                          addproducts, context);
-                                                    },
-                                                  );
-                                                } else {
-                                                  // Return a loading indicator or a placeholder widget if needed
-                                                  return CircularProgressIndicator();
-                                                }
-                                              },
-                                            ),
-                                            IconButton(
-                                              icon: Icon(
-                                                  Icons.shopping_cart_outlined),
-                                              onPressed: () {
-                                                setState(() {
-                                                  checkCart(
-                                                      addproducts, context);
-                                                });
-                                              },
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                ],
+                                              IconButton(
+                                                icon: Icon(
+                                                    Icons.shopping_cart_outlined),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    checkCart(
+                                                        addproducts, context);
+                                                  });
+                                                },
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           );

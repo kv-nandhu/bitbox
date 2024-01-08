@@ -7,6 +7,7 @@ import 'package:bitebox/models/user_product.dart';
 import 'package:bitebox/user/rec_detailScreen.dart';
 import 'package:flutter/material.dart';
 
+
 class CatBreakfast extends StatefulWidget {
   final String categorys;
    const CatBreakfast({required this.categorys,Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class _CatBreakfastState extends State<CatBreakfast> {
                   return GestureDetector(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
+                      child: SizedBox(
                         height: 160,
                         child: Card(
                           elevation: 10,
@@ -101,22 +102,13 @@ class _CatBreakfastState extends State<CatBreakfast> {
                                       )
                                     ],
                                   ),
-                                  trailing: FutureBuilder<Icon>(
-                                              future: getIcon(addproducts),
-                                              builder: (context, snapshot) {
-                                                if (snapshot.connectionState ==
-                                                    ConnectionState.done) {
-                                                  return IconButton(
-                                                    icon: snapshot.data!,
-                                                    onPressed: () {
-                                                      addfav_button(
+                                  trailing:    IconButton(
+                                              icon: getIcon(addproducts),
+                                              onPressed: () {
+                                                setState(() {
+                                                    addfav_button(
                                                           addproducts, context);
-                                                    },
-                                                  );
-                                                } else {
-                                                  // Return a loading indicator or a placeholder widget if needed
-                                                  return CircularProgressIndicator();
-                                                }
+                                                });
                                               },
                                             ),),
                             ),
