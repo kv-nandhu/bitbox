@@ -28,6 +28,7 @@ void checkCart( addproducts, BuildContext context) async {
         about: addproducts.about,
         image: addproducts.image,
          category: addproducts.category,
+         unit: addproducts.unit,
         count: 1,
         id: -1,);
     chelp.save(cart);

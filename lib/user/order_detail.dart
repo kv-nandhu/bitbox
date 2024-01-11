@@ -52,8 +52,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
                               height: 10,
                             ),
                             Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.start, //lastupdate
+                              // mainAxisAlignment:
+                              //     MainAxisAlignment.start, //lastupdate
                               children: [
                                 SizedBox(
                                   width: 10,
@@ -66,51 +66,54 @@ class _OrdersScreenState extends State<OrdersScreen> {
                                             BorderRadius.circular(20)),
                                     child: Image.file(
                                         File(orderdetail.productImage))),
-                                SizedBox(
-                                  width: 10,
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                                             
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                          //  crossAxisAlignment: CrossAxisAlignment.start,
+                                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            orderdetail.productName,
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        
+                                          SizedBox(width: 110,),
+                                           Text(
+                                                 '₹${orderdetail.totalPrice.toString()}',
+                                                 style: GoogleFonts.rubik(
+                                                     fontSize: 14,
+                                                     fontWeight: FontWeight.w500),
+                                               )
+                                            
+                                        ],
+                                      ),
+                                      
+                                           Row(
+                                                //  crossAxisAlignment: CrossAxisAlignment.start,
+                                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,                                        
+                                             children: [
+                                              Text(
+                                               'Qty : ${orderdetail.productCount.toString()}',
+                                             ),
+                                             SizedBox(width: 120,),  
+                                              Text(
+                                              'OrderPlaced',
+                                              style: GoogleFonts.rubik(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.green),
+                                            ),
+                                             ],
+                                           )
+                                    ],
+                                  ),
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      orderdetail.productName,
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'Qty : ${orderdetail.productCount.toString()}',
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 44,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  //   mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      'OrderPlaced',
-                                      style: GoogleFonts.rubik(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.green),
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Text(
-                                      '₹${orderdetail.totalPrice.toString()}',
-                                      style: GoogleFonts.rubik(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500),
-                                    )
-                                  ],
-                                )
                               ],
                             ),
                             SizedBox(

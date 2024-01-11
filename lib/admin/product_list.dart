@@ -31,13 +31,7 @@ class _ProductListingState extends State<ProductListing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(onPressed: (){
-            setState(() {
-              
-            });
-          }, icon: Icon(Icons.restore))
-        ],
+      
         backgroundColor: Colors.redAccent.shade700,
         title: Text('product list'),
         centerTitle: true,

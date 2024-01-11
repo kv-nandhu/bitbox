@@ -19,7 +19,7 @@ void main() async {
   Hive.openBox<Cart>('cart');
   Hive.openBox<Addfavorite>('add_fav');
   Hive.openBox<Address>('address');
-  Hive.openBox<Address>('address');
+  Hive.openBox<Addproducts>('dbname');
 
   if (!Hive.isAdapterRegistered(UserAdapter().typeId)) {
     Hive.registerAdapter(UserAdapter());

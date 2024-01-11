@@ -156,49 +156,64 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                     border: Border.all(color: Colors.black),
                                     borderRadius: BorderRadius.circular(20)),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .spaceBetween, // Adjust as needed
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ClipRRect(
+                                             borderRadius: const BorderRadius.all(
+                                            Radius.circular(20)                                                    ),
+                                            child: SizedBox(
+                                              width: 92,
+                                              height: 100,
+                                              child: Image.file(
+                                                File(cartgl.image),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                           Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        Text(
+                                          cart.name!,
+                                          style: GoogleFonts.rubik(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        Text('₹${cart.prize}',
+                                            style: GoogleFonts.rubik(
+                                                color: Colors.green,
+                                                fontSize: 15)),
+                                      ],
+                                    ),
+                                      ],
+                                    ),
                                     SizedBox(
                                       width: 1,
                                     ),
-                                    SizedBox(
-                                      width: 92,
-                                      height: 100,
-                                      child: Image.file(
-                                        File(cartgl.image),
-                                        fit: BoxFit.cover,
-                                      ),
+                                 
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                removecart(context, cart.id);
+                                              });
+                                            },
+                                            icon: Icon(
+                                              Icons.delete,
+                                              color: Colors.red,
+                                            )),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 1,
-                                    ),
-                                    Text(
-                                      cart.name!,
-                                      style: GoogleFonts.rubik(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Text('₹${cart.prize}',
-                                        style: GoogleFonts.rubik(
-                                            color: Colors.green, fontSize: 15)),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            removecart(context, cart.id);
-                                          });
-                                        },
-                                        icon: Icon(
-                                          Icons.delete,
-                                          color: Colors.red,
-                                        )),
                                     SizedBox(
                                       width: 1,
                                     )
@@ -256,44 +271,71 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               builder: (BuildContext context,
                                   List<Cart> cartlist, Widget? child) {
                                 return ElevatedButton(
-                                    onPressed: () async {
-                                      final cartBox =
-                                          await Hive.openBox<Cart>(
-                                              'cart');
-                                      for (var i = 0;
-                                          i < cartBox.length;
-                                          i++) {
-                                        final data = cartlist[i];
-                                        final order = Oredrplace(
-                                            id: data.id,
-                                            productName: data.name!,
-                                            productPrice: data.prize!,
-                                            productabout: data.about!,
-                                            productImage: data.image!,
-                                            totalPrice: int.parse(
-                                                data.prize!), //ith mattanam
-                                            productCount: data.count!,
-                                            deliveryName: widget.address.usrname,
-                                            deliveryPhone:
-                                                widget.address.number,
-                                            deliveryAddress:
-                                                widget.address.address,
-                                            deliveryCity: widget.address.city,
-                                            pincode: widget.address.pincode);
-                                        addtoorder(order);
-                                        cartBox.clear();
-                                       chelp.getall();
-                          
-                                        Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (ctx) => CnfrmPage()),
-                                            (route) => false);
-                                      }
-                                    },style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.black
-                                    ),
-                                    child: Text('Place Order'));
+    onPressed: () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Confirm Order'),
+            content: Text('Do you want to place the order?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context); // Close the dialog
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context); // Close the dialog
+                  final cartBox = await Hive.openBox<Cart>('cart');
+                  for (var i = 0; i < cartBox.length; i++) {
+                    final data = cartlist[i];
+                    final order = Oredrplace(
+                      id: data.id,
+                      productName: data.name!,
+                      productPrice: data.prize!,
+                      productabout: data.about!,
+                      productImage: data.image!,
+                      totalPrice: int.parse(data.prize!),
+                      productCount: data.count!,
+                      deliveryName: widget.address.usrname,
+                      deliveryPhone: widget.address.number,
+                      deliveryAddress: widget.address.address,
+                      deliveryCity: widget.address.city,
+                      pincode: widget.address.pincode,
+                    );
+                    addtoorder(order);
+                    cartBox.clear();
+                    chelp.getall();
+
+                    // Show the SnackBar
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Order placed successfully!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (ctx) => CnfrmPage()),
+                      (route) => false,
+                    );
+                  }
+                },
+                child: Text('Place Order'),
+              ),
+            ],
+          );
+        },
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.black,
+    ),
+    child: Text('Place Order'),
+  );
                               }),
                         ),
                         SizedBox(

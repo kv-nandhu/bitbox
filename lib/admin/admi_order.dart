@@ -1,5 +1,5 @@
 
-import 'package:bitebox/user/order_detail.dart';
+import 'package:bitebox/admin/admin_orderscreens.dart';
 import 'package:bitebox/user/order_cncl.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +30,7 @@ class _OrderMainState extends State<OrderMain> {
         ),
         body: TabBarView(
               children: const [
-                 OrdersScreen(),
+                 OrdersScreenpage(),
                 CancelDetails(), 
               ],)
       

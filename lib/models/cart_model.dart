@@ -26,6 +26,8 @@ class Cart extends HiveObject {
     @HiveField(6)
   String? about;
 
+    @HiveField(7)
+  String? unit;
   
   
   Cart(
@@ -35,5 +37,6 @@ class Cart extends HiveObject {
       required this.category,
       required this.about,
         required this.count,
+        required this.unit,
       this.id});
 }

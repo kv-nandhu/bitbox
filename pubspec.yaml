@@ -51,6 +51,7 @@ dependencies:
   provider:
   path_provider: ^2.1.1
   path:
+  flutter_blurhash: ^0.8.2
 
  
 

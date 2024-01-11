@@ -49,7 +49,7 @@ class _FavScreenState extends State<FavScreen> {
               ),
             )
           : Padding(
-              padding: const EdgeInsets.only(top: 20, bottom: 10),
+              padding: const EdgeInsets.only(top: 20, bottom: 10,left: 6,right: 6),
               child: Column(
                 children: [
                   ValueListenableBuilder(

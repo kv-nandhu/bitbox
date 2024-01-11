@@ -27,6 +27,7 @@ class carthHelper {
         image: data.image,
         about: data.about,
         count: data.count,
+        unit: data.unit,
         id: id,
       ),
     );

@@ -4,8 +4,10 @@ import 'dart:io';
 
 import 'package:bitebox/function/addcart_button.dart';
 import 'package:bitebox/function/cartdbhelper.dart';
+import 'package:bitebox/function/dbfun.dart';
 import 'package:bitebox/models/cart_model.dart';
 import 'package:bitebox/address/address_screen.dart';
+import 'package:bitebox/models/user_product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -13,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 carthHelper chelp = carthHelper();
+dbhelper dbh = dbhelper();
 late double totals;
 
 class CartScreen extends StatefulWidget {
@@ -24,12 +27,14 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   late Box<Cart> cartBox = Hive.box<Cart>('cart');
-  int total = 0;
+  late Box<Addproducts> pdBox = Hive.box<Addproducts>('dbname');
+  final int total = 0;
 
   @override
   void initState() {
     super.initState();
     chelp.getall();
+    dbh.getall();
   }
 
   @override
@@ -41,7 +46,7 @@ class _CartScreenState extends State<CartScreen> {
     Future.delayed(Duration(microseconds: 1), () {
       setState(() {});
     });
-    total = 0;
+    var total = 0;
 
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -129,101 +134,127 @@ class _CartScreenState extends State<CartScreen> {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 10),
-                                              child: Container(
-                                                width: 90,
-                                                height: 108,
-                                                child: Image.file(
-                                                  File(cart.image!),
-                                                  fit: BoxFit.cover,
-                                                ),
+                                              child: Row(
+                                                children: [
+                                                  ClipRRect(
+                                                      borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)
+                                      ),
+                                                    child: Container(      
+                                                      width: 80,
+                                                      height: 100,
+                                                      child: Image.file(
+                                                        File(cart.image!),
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(8.0),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                        Text(
+                                                          cart.name!,
+                                                          style:
+                                                              GoogleFonts.rubik(
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 15,
+                                                        ),
+                                                        Text('₹${cart.prize!}'),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Text(
-                                                  cart.name!,
-                                                  style: GoogleFonts.rubik(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                SizedBox(
-                                                  height: 15,
-                                                ),
-                                                Text('₹${cart.prize!}'),
-                                              ],
                                             ),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 10, right: 10),
-                                              child: Container(
-                                                height: 124,
-                                                decoration: BoxDecoration(
-                                                    color: Color.fromARGB(
-                                                        255, 67, 130, 178),
-                                                    border: Border.all(
-                                                        color: Colors.black),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                                child: Column(
-                                                  children: [
-                                                    IconButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          //add(cart.count);
-                                                          // cart.count++;
-                                                          if (cart.count! < 9) {
-                                                            cart.count =
-                                                                (cart.count! +
-                                                                        1)
-                                                                    .clamp(
-                                                                        0, 9);
-                                                          } else {
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                                    SnackBar(
-                                                              content: Text(
-                                                                  'Max Limit'),
-                                                              duration:
-                                                                  Duration(
-                                                                      seconds:
-                                                                          2),
-                                                              backgroundColor:
-                                                                  Colors.red,
-                                                            ));
-                                                          }
-                                                        });
-                                                      },
-                                                      icon: Icon(
-                                                        CupertinoIcons.add,
-                                                      ),
-                                                      iconSize: 20,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 124,
+                                                    decoration: BoxDecoration(
+                                                        color: Color.fromARGB(
+                                                            255, 67, 130, 178),
+                                                        border: Border.all(
+                                                            color:
+                                                                Colors.black),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20)),
+                                                    child: Column(
+                                                      children: [
+                                                        IconButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              if (cart.count! <
+                                                                  int.parse(cart.unit!)) {
+                                                                cart.count =
+                                                                    (cart.count! +
+                                                                            1)
+                                                                        .clamp(
+                                                                            0,
+                                                                            9);
+                                                              } else {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                        SnackBar(
+                                                                  content: Text(
+                                                                      'Max Limit'),
+                                                                  duration:
+                                                                      Duration(
+                                                                          seconds:
+                                                                              2),
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .red,
+                                                                ));
+                                                              }
+                                                            });
+                                                          },
+                                                          icon: Icon(
+                                                            CupertinoIcons.add,
+                                                          ),
+                                                          iconSize: 20,
+                                                        ),
+                                                        Text('${cart.count}'),
+                                                        IconButton(
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              if (cart.count! >
+                                                                  1) {
+                                                                cart.count =
+                                                                    (cart.count! -
+                                                                            1)
+                                                                        .clamp(
+                                                                            0,
+                                                                            9);
+                                                              }
+                                                            });
+                                                          },
+                                                          icon: Icon(
+                                                              CupertinoIcons
+                                                                  .minus),
+                                                        )
+                                                      ],
                                                     ),
-                                                    Text('${cart.count}'),
-                                                    IconButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          if (cart.count! > 1) {
-                                                            cart.count =
-                                                                (cart.count! -
-                                                                        1)
-                                                                    .clamp(
-                                                                        0, 9);
-                                                          }
-                                                        });
-                                                      },
-                                                      icon: Icon(
-                                                          CupertinoIcons.minus),
-                                                    )
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             )
                                           ],
@@ -247,73 +278,75 @@ class _CartScreenState extends State<CartScreen> {
                       child: ValueListenableBuilder<Box<Cart>>(
                           valueListenable: cartBox.listenable(),
                           builder: (context, cartBox, _) {
-                            return Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Sub-Total",
-                                        style: TextStyle(
-                                          fontSize: 20,
+                            return Container(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Sub-Total",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        '₹${total.toString()}',
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Divider(
-                                  color: Colors.black,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Delivery",
-                                        style: TextStyle(
-                                          fontSize: 20,
+                                        Text(
+                                          '₹${total.toString()}',
+                                          style: TextStyle(fontSize: 20),
                                         ),
-                                      ),
-                                      Text(
-                                        "₹50",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Divider(
-                                  color: Colors.black,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(vertical: 10),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Total",
-                                        style: TextStyle(
-                                          fontSize: 20,
+                                  Divider(
+                                    color: Colors.black,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Delivery",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        "₹${total + 50}", // Assuming total is the correct variable
-                                        style: TextStyle(
-                                            fontSize: 20, color: Colors.red),
-                                      ),
-                                    ],
+                                        Text(
+                                          "₹50",
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  Divider(
+                                    color: Colors.black,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Total",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                        Text(
+                                          "₹${total + 50}", // Assuming total is the correct variable
+                                          style: TextStyle(
+                                              fontSize: 20, color: Colors.red),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
                           }),
                     ),

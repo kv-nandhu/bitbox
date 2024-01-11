@@ -1,5 +1,4 @@
 import 'package:bitebox/user/main_home.dart';
-import 'package:bitebox/user/track.dart';
 import 'package:flutter/material.dart';
 
 class CnfrmPage extends StatefulWidget {

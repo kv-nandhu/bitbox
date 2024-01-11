@@ -21,8 +21,9 @@ class _UsersListScreenState extends State<UsersListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+     
       appBar: AppBar(
+         backgroundColor: Colors.redAccent.shade700,
         leading: IconButton(
             onPressed: () {
               Navigator.push(
@@ -35,7 +36,7 @@ class _UsersListScreenState extends State<UsersListScreen> {
               color: Colors.black,
             )),
         elevation: 0,
-        backgroundColor: Colors.white,
+      
         centerTitle: true,
         title: Text(
           'Users List',

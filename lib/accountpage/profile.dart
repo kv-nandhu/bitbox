@@ -2,9 +2,9 @@
 
 import 'package:bitebox/accountpage/edit_profile.dart';
 import 'package:bitebox/accountpage/more_info.dart';
+import 'package:bitebox/accountpage/terms.dart';
 import 'package:bitebox/comon_page/first_screen.dart';
 import 'package:bitebox/main.dart';
-import 'package:bitebox/user/track.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -139,34 +139,34 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            //  Padding(
-            //   padding: const EdgeInsets.all(8),
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //         border: Border.all(
-            //           color: Colors.black,
-            //         ),
-            //         borderRadius: BorderRadius.circular(18)),
-            //     child: ListTile(
-            //       onTap: () {
-            //         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TrackScreen()));
-            //       },
-            //       leading: Icon(
-            //         Icons.more_horiz_sharp,
-            //         color: Colors.black,
-            //       ),
-            //       trailing: Icon(
-            //         Icons.arrow_forward_ios,
-            //         color: Colors.black,
-            //       ),
-            //       title: Text(
-            //         'Track order',
-            //         style:
-            //             GoogleFonts.poppins(color: Colors.black, fontSize: 17),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+             Padding(
+              padding: const EdgeInsets.all(8),
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.circular(18)),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => TermsScreen()));
+                  },
+                  leading: Icon(
+                    Icons.telegram,
+                    color: Colors.black,
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    'Terms & Condition',
+                    style:
+                        GoogleFonts.poppins(color: Colors.black, fontSize: 17),
+                  ),
+                ),
+              ),
+            ),
        
             Padding(
               padding: const EdgeInsets.all(8),

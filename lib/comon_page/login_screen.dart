@@ -46,7 +46,6 @@ class LoginScreen extends StatelessWidget {
                     height: 30,
                   ),
                   TextFormField(
-                    cursorColor: const Color.fromARGB(255, 255, 255, 255),
                     controller: emailController,
                     maxLength: 20,
                     keyboardType: TextInputType.emailAddress,

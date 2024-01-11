@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bitebox/accountpage/edit_profile.dart';
 import 'package:bitebox/models/cart_model.dart';
 import 'package:bitebox/whishlist/addfav.dart';
 import 'package:bitebox/function/dbfun.dart';
@@ -20,8 +21,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchcontrol = TextEditingController();
-  late Box<Addproducts> productBox = Hive.box<Addproducts>(dbname);
-  late Box<Cart> cartBox = Hive.box<Cart>('cart');
+  late  Box<Addproducts> productBox = Hive.box<Addproducts>(dbname);
+  final Box<Cart> cartBox = Hive.box<Cart>('cart');
 
   @override
   void initState() {
@@ -76,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   });
                 },
-                icon: Icon(Icons.shop_2_outlined),
+                icon: Icon(Icons.shopping_cart_outlined),
               ),
               Positioned(
                   top: 8.0,
@@ -99,8 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Padding(
             padding: EdgeInsets.only(left: 10, right: 15),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('images/profile.jpg'),
+            child: GestureDetector(
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfile())),
+              child: CircleAvatar(
+                backgroundImage: AssetImage('images/profile.jpg'),
+              ),
             ),
           ),
         ],
@@ -230,9 +234,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               children: [
                                 CircleAvatar(
+                                  backgroundColor: Colors.grey,
                                   radius: 30,
                                   backgroundImage: assetimage[index],
                                 ),
+                               
+                                
                                 SizedBox(height: 4),
                                 Text(
                                   names[index],
@@ -274,95 +281,103 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 12.0,
                           mainAxisSpacing: 12.0,
-                          mainAxisExtent: 290,
+                          mainAxisExtent: 299,
                         ),
                         itemBuilder: (context, index) {
-                          final addproducts = addlist[index];
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailScreen(
-                                    products: addproducts,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                ),
-                                child: Column(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(16.0),
-                                        topRight: Radius.circular(16.0),
-                                      ),
-                                      child: Image.file(
-                                        File(addproducts.image!),
-                                        height: 170,
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                      ),
+                          final addproducts = addlist.reversed.toList()[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailScreen(
+                                      products: addproducts,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            addproducts.name!,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium!
-                                                .merge(
-                                                  const TextStyle(
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                          ),
-                                          const SizedBox(
-                                            height: 8.0,
-                                          ),
-                                          Text('₹${addproducts.prize}'),
-                                          const SizedBox(
-                                            height: 8.0,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              IconButton(
-                                                icon: getIcon(addproducts),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    addfav_button(
-                                                        addproducts, context);
-                                                  });
-                                                },
-                                              ),
-                                              IconButton(
-                                                icon: Icon(
-                                                    Icons.shopping_cart_outlined),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    checkCart(
-                                                        addproducts, context);
-                                                  });
-                                                },
-                                              ),
-                                            ],
-                                          )
-                                        ],
+                                  ),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: Container(
+                                  
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    color: Color.fromARGB(255, 255, 254, 254),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(16.0),
+                                          topRight: Radius.circular(16.0),
+                                        ),
+                                        child: Container(
+                                          color: Colors.grey,
+                                          child:
+                                           Image.file(
+                                            File(addproducts.image!),
+                                            height: 170,
+                                            width: double.infinity,
+                                            fit: BoxFit.cover,
+                                                                                 ),
+                                        ),
                                       ),
-                                    )
-                                  ],
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              addproducts.name!,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium!
+                                                  .merge(
+                                                    const TextStyle(
+                                                      fontWeight: FontWeight.w700,
+                                                    ),
+                                                  ),
+                                            ),
+                                            const SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            Text('₹${addproducts.prize}'),
+                                            const SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                IconButton(
+                                                  icon: getIcon(addproducts),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      addfav_button(
+                                                          addproducts, context);
+                                                    });
+                                                  },
+                                                ),
+                                                IconButton(
+                                                  icon: Icon(
+                                                      Icons.shopping_cart_outlined),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      checkCart(
+                                                          addproducts, context);
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -381,11 +396,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void searchProducts(String value) {
-    final product = productBox.values.toList();
+  final product = productBox.values.toList();
+  if (value.isEmpty) {
+    // If the search text is empty, show all products
+    productlist.value = product;
+  } else {
+    // Filter products based on the search text
     final filteredProducts = product
         .where((products) =>
             products.name!.toLowerCase().contains(value.toLowerCase()))
         .toList();
     productlist.value = filteredProducts;
   }
+}
+
 }
