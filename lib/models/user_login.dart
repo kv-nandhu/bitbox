@@ -6,21 +6,28 @@ part 'user_login.g.dart';
 @HiveType(typeId: 1)
 class User extends HiveObject {
   @HiveField(0)
-   late String email;
+    String email;
 
  @HiveField(1)
-   late String name;
+    String name;
 
  @HiveField(2)
-   late String number;
+    String number;
 
  @HiveField(3)
-   late String password;
+    String password;
+    
+ @HiveField(4)
+    String image;
 
+ @HiveField(5)
+    int ? id;
   User(
     {required this.email,
     required this.name,
     required this.number,
-    required this.password}
+    required this.password,
+    required this.image,
+       required this.id}
   );
 }

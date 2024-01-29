@@ -6,13 +6,14 @@ import 'package:bitebox/function/addcart_button.dart';
 import 'package:bitebox/function/cartdbhelper.dart';
 import 'package:bitebox/function/dbfun.dart';
 import 'package:bitebox/models/cart_model.dart';
-import 'package:bitebox/address/address_screen.dart';
-import 'package:bitebox/models/user_product.dart';
+import 'package:bitebox/user/address/address_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../admin/admin_models/user_product.dart';
 
 carthHelper chelp = carthHelper();
 dbhelper dbh = dbhelper();
@@ -99,7 +100,7 @@ class _CartScreenState extends State<CartScreen> {
                                   int? quantity = cart.count;
                                   int totalPrice = price * quantity!;
 
-                                  total += totalPrice + 50;
+                                  total += totalPrice;
 
                                   return Padding(
                                     padding: const EdgeInsets.only(
@@ -137,10 +138,11 @@ class _CartScreenState extends State<CartScreen> {
                                               child: Row(
                                                 children: [
                                                   ClipRRect(
-                                                      borderRadius: const BorderRadius.all(
-                                      Radius.circular(20)
-                                      ),
-                                                    child: Container(      
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(
+                                                                20)),
+                                                    child: Container(
                                                       width: 80,
                                                       height: 100,
                                                       child: Image.file(
@@ -150,10 +152,13 @@ class _CartScreenState extends State<CartScreen> {
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.all(8.0),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Column(
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment.start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
@@ -202,7 +207,8 @@ class _CartScreenState extends State<CartScreen> {
                                                           onPressed: () {
                                                             setState(() {
                                                               if (cart.count! <
-                                                                  int.parse(cart.unit!)) {
+                                                                  int.parse(cart
+                                                                      .unit!)) {
                                                                 cart.count =
                                                                     (cart.count! +
                                                                             1)
@@ -338,7 +344,7 @@ class _CartScreenState extends State<CartScreen> {
                                           ),
                                         ),
                                         Text(
-                                          "₹${total + 50}", // Assuming total is the correct variable
+                                          "₹${total+50}", // Assuming total is the correct variable
                                           style: TextStyle(
                                               fontSize: 20, color: Colors.red),
                                         ),

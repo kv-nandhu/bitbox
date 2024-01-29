@@ -1,3 +1,6 @@
+// ignore_for_file: constant_identifier_names, use_key_in_widget_constructors
+
+import 'package:bitebox/custom/login_extract.dart';
 import 'package:bitebox/comon_page/sign_screen.dart';
 import 'package:bitebox/models/user_login.dart';
 import 'package:bitebox/user/main_home.dart';
@@ -5,14 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// ignore: constant_identifier_names
-// ignore: must_be_immutable
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+  const SAVE_KEY_NAME = 'saveUserEmail';
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
-  // ignore: unused_field
+class _LoginScreenState extends State<LoginScreen> {
+
+
   final _formKey = GlobalKey<FormState>();
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -23,81 +31,52 @@ class LoginScreen extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 188, 187, 187)
-          ])),
+                Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(255, 188, 187, 187)
+              ])),
       child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Padding(
-            padding: EdgeInsets.all(30.0),
-            child: Center(
+        backgroundColor: Colors.transparent,
+        body: Padding(
+          padding: EdgeInsets.all(30.0),
+          child: Center(
+            child: Form(
+              key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Login',
                     style: GoogleFonts.rubik(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w500,
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        fontStyle: FontStyle.italic),
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                   SizedBox(
                     height: 30,
                   ),
-                  TextFormField(
-                    controller: emailController,
-                    maxLength: 20,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      fillColor: Color.fromARGB(255, 255, 255, 255),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(255, 248, 248, 248),
-                            width: 2,
-                          )),
-                          
-                      labelText: "Email",
-                      hintText: "Enter email",
-                      prefixIcon: Icon(Icons.email_outlined),
-                      suffixIcon: Icon(Icons.verified_user),
-                      helperText: "Enter your valid email",
-                      
-                    ),
-                  ),
+                  logintextemail(emailController: emailController),
                   SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: true,
-                    maxLength: 10,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(255, 255, 255, 255),
-                              width: 2,
-                            )),
-                        labelText: "Password",
-                        hintText: "Enter password",
-                        prefixIcon: Icon(Icons.lock_outline_rounded),
-                        suffixIcon: Icon(Icons.verified_user),
-                        helperText: "Atleast 6 characters "),
-                  ),
+                  logintextpassword(passwordController: passwordController),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black, backgroundColor: Colors.grey,
-                      ),
-                      onPressed: () {
-                        login(emailController.text, passwordController.text,
-                            context);
-                      },
-                      child: Text(
-                        'Login',
-                        style: TextStyle(fontSize: 20),
-                      )),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      backgroundColor: Colors.grey,
+                    ),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        login(
+                            emailController.text, passwordController.text, context);
+                      }
+                    },
+                    child: Text(
+                      'Login',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -126,13 +105,14 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 
   void login(String email, String password, BuildContext context) async {
-    final usersBox =
-        await Hive.openBox<User>('users'); // Open the Hive box for users
+    final usersBox = await Hive.openBox<User>('users');
     User? user;
     for (var i = 0; i < usersBox.length; i++) {
       final currentUser = usersBox.getAt(i);
@@ -143,12 +123,12 @@ class LoginScreen extends StatelessWidget {
     }
     if (user != null) {
       final sharedPrefs = await SharedPreferences.getInstance();
-      sharedPrefs.setBool("saveUserEmail", true);
+      sharedPrefs.setBool(SAVE_KEY_NAME, true);
+      sharedPrefs.setString('currentUser', email);
       // ignore: use_build_context_synchronously
-      // Navigator.pushReplacement(
-      //     context, MaterialPageRoute(builder: (context) => HomesScreenPage()));
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (home)=>HomesScreenPage()), (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (home) => HomesScreenPage()),
+          (route) => false);
     } else {
       // ignore: use_build_context_synchronously
       showDialog(
@@ -168,9 +148,7 @@ class LoginScreen extends StatelessWidget {
       );
     }
   }
-  Future<void> saveUserEmail(String email) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('currentUser', email);
-  }
 }
-//logout button
+
+ 
+

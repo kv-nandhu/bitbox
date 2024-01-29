@@ -1,33 +1,20 @@
 // ignore: file_names
 import 'dart:io';
-
-import 'package:bitebox/whishlist/addfav.dart';
+import 'package:bitebox/user/whishlist/addfav.dart';
 import 'package:bitebox/function/dbfun.dart';
-import 'package:bitebox/models/user_product.dart';
+import 'package:bitebox/admin/admin_models/user_product.dart';
 import 'package:bitebox/user/rec_detailScreen.dart';
 import 'package:flutter/material.dart';
 
-
 class CatBreakfast extends StatefulWidget {
   final String categorys;
-   const CatBreakfast({required this.categorys,Key? key}) : super(key: key);
+  const CatBreakfast({required this.categorys, Key? key}) : super(key: key);
 
   @override
   State<CatBreakfast> createState() => _CatBreakfastState();
 }
 
 class _CatBreakfastState extends State<CatBreakfast> {
-
-
-  // ignore: non_constant_identifier_names
-  Color Checkstock(String stocks) {
-    if (stocks == 'In Stock') {
-      return Colors.green;
-    } else {
-      return Colors.orange;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,30 +27,29 @@ class _CatBreakfastState extends State<CatBreakfast> {
             valueListenable: productlist,
             builder: (context, List<Addproducts> cataddlist, Widget? child) {
               final filterdlist = cataddlist
-              .where((product) => product.category == widget.categorys)
-              .toList();
-              if(filterdlist.isEmpty){
+                  .where((product) => product.category == widget.categorys)
+                  .toList();
+              if (filterdlist.isEmpty) {
                 return Center(
                   child: Text(('No Product')),
                 );
-              }else{
-              return ListView.builder(
-                itemCount: filterdlist.length,
-                itemBuilder: (context, index) {
-                  final addproducts = filterdlist[index];
-                  // ignore: sized_box_for_whitespace
-                  return GestureDetector(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        height: 160,
-                        child: Card(
-                          elevation: 10,
-                          child: Column(children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: ListTile(
-
+              } else {
+                return ListView.builder(
+                  itemCount: filterdlist.length,
+                  itemBuilder: (context, index) {
+                    final addproducts = filterdlist[index];
+                    // ignore: sized_box_for_whitespace
+                    return GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 160,
+                          child: Card(
+                            elevation: 10,
+                            child: Column(children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: ListTile(
                                   // ignore: sized_box_for_whitespace
                                   leading: Container(
                                     clipBehavior: Clip.antiAlias,
@@ -87,7 +73,7 @@ class _CatBreakfastState extends State<CatBreakfast> {
                                       Text(
                                         '${addproducts.name}',
                                         style: TextStyle(
-                                            fontSize: 16, 
+                                            fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black),
                                       ),
@@ -102,57 +88,45 @@ class _CatBreakfastState extends State<CatBreakfast> {
                                       )
                                     ],
                                   ),
-                                  trailing:    IconButton(
-                                              icon: getIcon(addproducts),
-                                              onPressed: () {
-                                                setState(() {
-                                                    addfav_button(
-                                                          addproducts, context);
-                                                });
-                                              },
-                                            ),),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(11),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // Text(
-                                  //   '${productlist[index].stock}',
-                                  //   style: TextStyle(
-                                  //       color: Checkstock(productlist[index].stock),
-                                  //       fontWeight: FontWeight.w600),
-                                  // ),
-                                  Text(
-                                    'In Stock',
-                                    style: TextStyle(color: Colors.green),
+                                  trailing: IconButton(
+                                    icon: getIcon(addproducts),
+                                    onPressed: () {
+                                      setState(() {
+                                        addfav_button(addproducts, context);
+                                      });
+                                    },
                                   ),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DetailScreen(
-                                                      products: addproducts,
-                                                    )));
-                                      },
-                                      style: ButtonStyle(),
-                                      child: Text('Details')),
-                                ],
+                                ),
                               ),
-                            ),
-                          ]),
+                              Padding(
+                                padding: const EdgeInsets.all(11),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DetailScreen(
+                                                        products: addproducts,
+                                                      )));
+                                        },
+                                        style: ButtonStyle(),
+                                        child: Text('Details')),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              );
-            }
-            }
-            )
-            );
+                    );
+                  },
+                );
+              }
+            }));
   }
 }

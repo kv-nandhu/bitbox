@@ -2,7 +2,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:bitebox/models/user_login.dart';
-import 'package:bitebox/models/user_product.dart';
+import 'package:bitebox/admin/admin_models/user_product.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 

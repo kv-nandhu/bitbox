@@ -9,7 +9,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 
 void checkCart( addproducts, BuildContext context) async {
-// await Hive.openBox<Cart>('cart');
+await Hive.openBox<Cart>('cart');
   
 
   final cartBox = Hive.box<Cart>('cart');

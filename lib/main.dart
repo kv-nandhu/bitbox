@@ -3,9 +3,9 @@ import 'package:bitebox/models/cart_model.dart';
 import 'package:bitebox/models/user_favorite.dart';
 import 'package:bitebox/comon_page/splash_screen.dart';
 import 'package:bitebox/models/user_login.dart';
-import 'package:bitebox/models/user_product.dart';
-import 'package:bitebox/order_cancel/cancel_model.dart';
-import 'package:bitebox/orders_place/order_model.dart';
+import 'package:bitebox/admin/admin_models/user_product.dart';
+import 'package:bitebox/models/cancel_model.dart';
+import 'package:bitebox/models/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 

@@ -19,9 +19,6 @@ Future<void> addtofav(Addfavorite value) async {
           about: favadata.about,
           category: favadata.category,
           id: id));
-  // value.id = _addfav;
-  // addfavlist.value.add(value);
-  // addfavlist.notifyListeners();
   getfavorite();
 }
 
